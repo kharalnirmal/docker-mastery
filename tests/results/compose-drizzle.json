@@ -1,6 +1,6 @@
 {
   "track": "drizzle",
-  "project": "guide-drizzle-check-1793687525430",
+  "project": "guide-drizzle-check-1793689285810",
   "platform": "win32",
   "checks": [
     "Compose configuration",
@@ -12,9 +12,9 @@
     "data survives full container replacement",
     "database outage: health 200, readiness 503, then recovery"
   ],
-  "base": "http://127.0.0.1:32807",
+  "base": "http://127.0.0.1:32817",
   "images": {
-    "app": "sha256:00f3a4e59f91d89539655c02cb41356215ed0638b033e60a04f668640f1de1fe",
+    "app": "sha256:7973d4d916e20ea0685d708667a2253ec19bc83fc626d34d3b080bb3a99b2e35",
     "nodeTag": "node:24-bookworm-slim",
     "postgresTag": "postgres:18-bookworm"
   },

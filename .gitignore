@@ -11,7 +11,8 @@ generated/
 *.key
 *.p12
 *.pfx
-# Local artwork with unverified redistribution rights; public UI uses SVGs.
+# Keep full-size source artwork local; onboarding uses optimized WebP derivatives.
 assets/images/naruto.jpg
 assets/images/sasuke.jpg
 assets/images/sakura.jpg
+dist/

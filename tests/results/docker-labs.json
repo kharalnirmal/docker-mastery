@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-11-03T06:30:04.641Z",
-  "prefix": "fieldguide-0b841f2e",
+  "checkedAt": "2026-11-03T07:00:11.129Z",
+  "prefix": "fieldguide-61f78011",
   "checks": [
     "hello-world: greeting container exits zero",
     "Dockerfile builds; loopback HTTP returns 200 and checkpoint heading",

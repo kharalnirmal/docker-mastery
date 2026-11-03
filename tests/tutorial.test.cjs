@@ -67,6 +67,19 @@ test('onboarding social profiles use named local SVG icons and safe new tabs', (
   }
   for (const url of ['https://github.com/kharalnirmal', 'https://www.linkedin.com/in/kharalnirmal/', 'https://www.instagram.com/nirmalkharal/']) assert.ok(socials.includes(`href="${url}"`));
 });
+test('onboarding portraits are optimized, named, and dimensioned', () => {
+  const html = read('index.html');
+  for (const name of ['naruto', 'sakura', 'sasuke']) {
+    const image = html.match(new RegExp(`<img[^>]+src="assets/images/${name}\\.webp"[^>]+>`));
+    assert.ok(image, name);
+    assert.match(image[0], /width="440" height="440"/);
+    assert.match(image[0], /alt="[^"]+"/);
+    const data = fs.readFileSync(path.join(root, `assets/images/${name}.webp`));
+    assert.equal(data.toString('ascii', 8, 12), 'WEBP');
+    assert.ok(data.length < 35000, name);
+  }
+  assert.match(html, /fetchpriority="high"/);
+});
 test('both tracks retain equivalent UI/API and safe container boundaries', () => {
   for (const file of ['lib/api.js', 'app/style.css', 'compose.yaml', 'compose.dev.yaml', 'compose.host.yaml']) {
     assert.equal(read(`examples/compose/prisma/${file}`), read(`examples/compose/drizzle/${file}`), file);

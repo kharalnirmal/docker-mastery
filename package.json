@@ -1,9 +1,10 @@
 {
   "name": "docker-mastery",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "node tools/serve.cjs",
-    "test": "node --test tests/tutorial.test.cjs tests/server.test.cjs"
+    "test": "node --test tests/tutorial.test.cjs tests/server.test.cjs tests/build.test.cjs",
+    "build": "node tools/build.cjs"
   }
 }

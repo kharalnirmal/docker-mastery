@@ -17,6 +17,7 @@ check(`(await Promise.all([document.fonts.load('400 15px Inter'), document.fonts
 for (const [width, height] of [[320,568],[375,667],[390,844],[768,1024],[1366,768],[1440,900],[844,390]]) {
   run('set', 'viewport', String(width), String(height));
   run('open', 'http://127.0.0.1:4173/#home');
+  check(`(await Promise.all([...document.querySelectorAll('.hero-stack img')].map(img => img.decode())), [...document.querySelectorAll('.hero-stack img')].every(img => img.naturalWidth === 440 && img.currentSrc.endsWith('.webp')))`);
   check(`document.documentElement.scrollWidth <= innerWidth && document.getElementById('home').scrollHeight <= document.getElementById('home').clientHeight + 1`);
   check(`document.querySelectorAll('.creator-socials a').length === 3 && [...document.querySelectorAll('.creator-socials a')].every(el => { const r = el.getBoundingClientRect(); return r.width >= 44 && r.height >= 44 && r.left >= 0 && r.right <= innerWidth && el.querySelector('svg') && el.getAttribute('aria-label'); })`);
   run('click', '.primary');

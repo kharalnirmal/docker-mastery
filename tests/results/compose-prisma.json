@@ -1,6 +1,6 @@
 {
   "track": "prisma",
-  "project": "guide-prisma-check-1793687525419",
+  "project": "guide-prisma-check-1793689251859",
   "platform": "win32",
   "checks": [
     "Compose configuration",
@@ -12,9 +12,9 @@
     "data survives full container replacement",
     "database outage: health 200, readiness 503, then recovery"
   ],
-  "base": "http://127.0.0.1:32808",
+  "base": "http://127.0.0.1:32815",
   "images": {
-    "app": "sha256:fdd1dc93d37d69053546ec79e36197d44e35d9a4963c395ba8dcc6a22056364a",
+    "app": "sha256:96c8d0bf7ae3d440fb21edc5571125fcec977c8ab6860ec75725169de0acbddb",
     "nodeTag": "node:24-bookworm-slim",
     "postgresTag": "postgres:18-bookworm"
   },

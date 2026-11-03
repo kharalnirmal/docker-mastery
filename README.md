@@ -122,9 +122,17 @@ Run the dependency-free structural and preview-server tests:
 npm test
 ```
 
+From a Git checkout, create the dependency-free static release with `npm run build`. Upload the contents
+of `dist/` to a static host. The export includes the guide and downloadable lab
+sources, but excludes Git metadata, local secrets, database archives, dependencies,
+test evidence, and full-size artwork. The exporter uses Git's tracked-file list;
+stage new public files before building. No hosting or publishing workflow is enabled
+automatically. Rerun the build after editing source files. A read-only GitHub Actions
+workflow runs the Node tests and static build on pushes and pull requests.
+
 Recorded local verification includes:
 
-- **12 passing Node tests** covering content, links, file parity, safety, and preview restrictions.
+- **14 passing Node tests** covering content, links, file parity, artwork budgets, safe exports, and preview restrictions.
 - Browser checks across **seven viewport sizes**, all 20 lessons at mobile width,
   keyboard navigation, search, themes, and trusted emulated touch.
 - Container/image/network/volume checks and BuildKit secret/cache boundaries.
@@ -134,6 +142,9 @@ Recorded local verification includes:
 Read [CONTENT-REVIEW.md](CONTENT-REVIEW.md) for dated results and limitations, and
 [LAB-VALIDATION.md](LAB-VALIDATION.md) for reproduction commands. Browser checks
 require a separately installed `agent-browser` and a running preview.
+Run `node tests/browser-accessibility.cjs` for light/dark axe scans, reduced-motion
+checks, and a 200% CSS-zoom reachability stress test. These automated checks do not
+replace screen-reader, physical-device, or manual browser/text-zoom review.
 
 **Runtime verification changes Docker state.** The scripts create uniquely named
 disposable resources and delete their own test data during cleanup. Local
@@ -167,9 +178,9 @@ Please distinguish observed test results from expected or unexecuted behavior.
 Created by **[Nirmal Kharal](https://github.com/kharalnirmal)**.
 
 Inter and JetBrains Mono are self-hosted with their bundled SIL Open Font
-Licenses in [`assets/fonts`](assets/fonts). Technical diagrams and public team
-illustrations are original SVGs; unverified third-party character images are
-excluded. See [NOTICE.md](NOTICE.md).
+Licenses in [`assets/fonts`](assets/fonts). Technical diagrams are original SVGs.
+Onboarding uses optimized, owner-supplied Naruto, Sakura, and Sasuke artwork;
+third-party redistribution rights remain unverified. See [NOTICE.md](NOTICE.md).
 
 Free to read does not imply an unrestricted software/content license. No blanket
 license is granted for the repository; third-party font licenses apply to their

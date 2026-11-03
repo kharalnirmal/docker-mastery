@@ -321,3 +321,58 @@ the new branding and illustrations: PASS. Staged paths exclude environment files
 (except deliberate .env.example), dependencies, generated output, dump archives,
 private-key files and unverified artwork. A common credential-pattern check found
 no matches; this is a publication check, not a complete secret-security guarantee.
+
+## Optimized Docker Mastery 1.0 release
+
+User requested the supplied Naruto, Sakura, and Sasuke portraits on onboarding,
+completion of remaining local release work, verification, and a GitHub push.
+This supersedes the prior decision to exclude all character artwork. Optimized
+WebP derivatives are now public at the owner's explicit request; full-size JPEGs
+remain ignored. The source artist/license/redistribution rights are unverified,
+and NOTICE.md makes no ownership or licensing claim for the portraits.
+
+- Resized the three supplied square portraits to 440×440 using Chromium canvas
+  WebP encoding at quality 0.82. Combined bytes: 64,712 versus 265,850 for the
+  originals (75.7% reduction). Explicit dimensions avoid image layout shifts;
+  Naruto is high-priority and all portraits have character/role alternative text.
+- Added a dependency-free `npm run build` public export, limited to tracked
+  guide/assets/lab-source files. New files must be staged before export. The build
+  refuses to replace an unowned dist directory and validates exported asset links.
+  Environment files other than intentional .env.example, raw JPEGs, dependency
+  folders, generated code, test evidence, backups and key files are excluded.
+- Added a read-only website-checks GitHub workflow for Node tests/static build.
+  It does not deploy, publish images, access release secrets, or activate the
+  separate GHCR teaching template.
+- Mobile axe scans exposed light-theme orange-badge and creator-avatar contrast
+  failures and keyboard-inaccessible horizontally scrolling code/table regions.
+  Darkened the light accent tokens and made those scroll surfaces focusable.
+  Onboarding now uses safe centering so oversized content remains reachable.
+
+Fresh observed checks on 2026-11-03, Windows / Linux AMD64 Docker Desktop:
+
+- PASS 14 Node tests, including WebP size/format/dimension budgets, HTTP WebP
+  content type, release filters and existing lesson/lab safety checks.
+- PASS seven-viewport documentation suite, including decoded WebP portraits,
+  all 20 mobile lessons and existing navigation/search/theme/history/copy checks.
+- PASS trusted Chromium touch drawer/search suite at 390×844.
+- PASS axe 4.12.1 for home, first container, Dockerfile, Compose and capstone in
+  both themes at 390×844: zero reported violations. One or two rules per page
+  still require human judgment (gradient/symbol contrast and closed-dialog
+  controls). PASS reduced-motion transition suppression and 200% CSS-zoom scroll
+  reachability; CSS zoom is not a full browser/OS text-enlargement certification.
+- PASS rerun foundations and BuildKit labs, including intentional missing-secret
+  rejection. PASS independent Prisma and Drizzle Compose, backup/restore/schema
+  expansion, controlled failed-migration recovery, hardened runtime/shutdown and
+  same-artifact replacement checks. Fresh JSON evidence replaces the corresponding
+  tests/results files. All runners cleaned their own disposable projects/data.
+- PASS both lockfile audits: zero known vulnerabilities at this check time.
+- PASS static export: 102 public files, 2.34 MiB, with evaluated lesson/template
+  links checked against exported files. The first build check incorrectly scanned
+  raw JavaScript interpolation as a literal path; it now evaluates trusted local
+  lesson modules before validating links, matching the site's rendered content.
+
+Remaining explicit limits: artwork permissions, manual screen-reader/contrast/
+browser-text-zoom review, physical devices, native cross-platform and ARM64
+execution, and public registry/VPS/TLS/production-authentication verification.
+No public infrastructure or paid resource was created. These are not silently
+treated as complete or required to read/run the local Docker curriculum.

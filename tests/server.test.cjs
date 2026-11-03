@@ -13,5 +13,8 @@ test('preview serves docs but blocks environment files, dependencies and backup 
       assert.equal((await fetch(base + url)).status, 403, url);
     }
     assert.equal((await fetch(base + '/missing')).status, 404);
+    const portrait = await fetch(base + '/assets/images/naruto.webp');
+    assert.equal(portrait.status, 200);
+    assert.equal(portrait.headers.get('content-type'), 'image/webp');
   } finally { await new Promise(resolve => server.close(resolve)); }
 });

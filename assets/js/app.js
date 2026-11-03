@@ -132,7 +132,14 @@
     }
   });
   function codeFrames() {
+    $('lesson').querySelectorAll('.table-wrap').forEach(table => {
+      table.tabIndex = 0;
+      table.setAttribute('role', 'group');
+      table.setAttribute('aria-label', table.querySelector('caption')?.textContent || 'Scrollable reference table');
+    });
     $('lesson').querySelectorAll('pre').forEach(pre => {
+      pre.tabIndex = 0;
+      pre.setAttribute('aria-label', 'Code example; scroll horizontally for long lines');
       const frame = document.createElement('div'); frame.className = 'code-frame';
       const head = document.createElement('div'); head.className = 'code-frame-header';
       const title = document.createElement('span'); title.className = 'code-frame-title';
