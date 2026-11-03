@@ -1,0 +1,45 @@
+{
+  "id": "9b72cc90-57af-4be3-a62c-5ea6110fd7af",
+  "prevId": "afb7e077-eaa3-422b-a388-4fa73ac07fb7",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.Member": {
+      "name": "Member", "schema": "",
+      "columns": {
+        "id": { "name": "id", "type": "text", "primaryKey": true, "notNull": true },
+        "name": { "name": "name", "type": "text", "primaryKey": false, "notNull": true }
+      },
+      "indexes": {}, "foreignKeys": {}, "compositePrimaryKeys": {}, "uniqueConstraints": {}, "policies": {}, "checkConstraints": {}, "isRLSEnabled": false
+    },
+    "public.Project": {
+      "name": "Project", "schema": "",
+      "columns": {
+        "id": { "name": "id", "type": "text", "primaryKey": true, "notNull": true },
+        "name": { "name": "name", "type": "text", "primaryKey": false, "notNull": true }
+      },
+      "indexes": {}, "foreignKeys": {}, "compositePrimaryKeys": {}, "uniqueConstraints": {}, "policies": {}, "checkConstraints": {}, "isRLSEnabled": false
+    },
+    "public.Task": {
+      "name": "Task", "schema": "",
+      "columns": {
+        "id": { "name": "id", "type": "text", "primaryKey": true, "notNull": true },
+        "title": { "name": "title", "type": "varchar(120)", "primaryKey": false, "notNull": true },
+        "done": { "name": "done", "type": "boolean", "primaryKey": false, "notNull": true, "default": false },
+        "description": { "name": "description", "type": "text", "primaryKey": false, "notNull": false },
+        "projectId": { "name": "projectId", "type": "text", "primaryKey": false, "notNull": true },
+        "assigneeId": { "name": "assigneeId", "type": "text", "primaryKey": false, "notNull": false }
+      },
+      "indexes": {
+        "Task_projectId_idx": { "name": "Task_projectId_idx", "columns": [{ "expression": "projectId", "isExpression": false, "asc": true, "nulls": "last" }], "isUnique": false, "concurrently": false, "method": "btree", "with": {} }
+      },
+      "foreignKeys": {
+        "Task_projectId_Project_id_fk": { "name": "Task_projectId_Project_id_fk", "tableFrom": "Task", "tableTo": "Project", "columnsFrom": ["projectId"], "columnsTo": ["id"], "onDelete": "restrict", "onUpdate": "cascade" },
+        "Task_assigneeId_Member_id_fk": { "name": "Task_assigneeId_Member_id_fk", "tableFrom": "Task", "tableTo": "Member", "columnsFrom": ["assigneeId"], "columnsTo": ["id"], "onDelete": "set null", "onUpdate": "cascade" }
+      },
+      "compositePrimaryKeys": {}, "uniqueConstraints": {}, "policies": {}, "checkConstraints": {}, "isRLSEnabled": false
+    }
+  },
+  "enums": {}, "schemas": {}, "sequences": {}, "roles": {}, "policies": {}, "views": {},
+  "_meta": { "columns": {}, "schemas": {}, "tables": {} }
+}

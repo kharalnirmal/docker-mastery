@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-11-03T06:30:04.704Z",
+  "tag": "guide-buildkit-check:1793687404703",
+  "checks": [
+    "required missing secret fails",
+    "secret/cache mounts work; rebuild succeeds; final image excludes mounted files and secret text in history; non-root proof runs"
+  ],
+  "passed": true,
+  "cleaned": true
+}

@@ -1,0 +1,23 @@
+{
+  "track": "drizzle",
+  "project": "guide-drizzle-check-1793687525430",
+  "platform": "win32",
+  "checks": [
+    "Compose configuration",
+    "standalone and tools builds without live database",
+    "fresh migration and repeat migration/seed",
+    "equivalent seeds and health endpoints",
+    "create, list, assignment, completion and invalid requests",
+    "non-root runner and unpublished database",
+    "data survives full container replacement",
+    "database outage: health 200, readiness 503, then recovery"
+  ],
+  "base": "http://127.0.0.1:32807",
+  "images": {
+    "app": "sha256:00f3a4e59f91d89539655c02cb41356215ed0638b033e60a04f668640f1de1fe",
+    "nodeTag": "node:24-bookworm-slim",
+    "postgresTag": "postgres:18-bookworm"
+  },
+  "passed": true,
+  "cleaned": true
+}

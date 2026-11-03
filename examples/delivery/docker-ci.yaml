@@ -1,0 +1,73 @@
+# TEMPLATE: copy into .github/workflows/ only after reviewing README.md.
+# Assumes guide files are at repository root. No production deploy or signing.
+name: Docker checks and approved GHCR publishing
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        track: [prisma, drizzle]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6 reviewed 2026-11-03
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: npm test
+      - name: Audit locked dependencies
+        working-directory: examples/compose/${{ matrix.track }}
+        run: npm audit --audit-level=low
+      - name: Build and exercise disposable hardened stack
+        run: node tools/check-delivery-labs.cjs ${{ matrix.track }} --ci
+  publish:
+    needs: checks
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: container-release # MUST configure required reviewers/branch rules
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        track: [prisma, drizzle]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Build and test the exact artifacts to publish
+        run: node tools/check-delivery-labs.cjs ${{ matrix.track }} --ci
+      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push tested image IDs without rebuilding
+        env:
+          TRACK: ${{ matrix.track }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repository="${GITHUB_REPOSITORY,,}"
+          result="tests/results/delivery-$TRACK.json"
+          for kind in app tools; do
+            id=$(node -e 'const r=require("./"+process.argv[1]); if(!r.passed || !r.cleaned) process.exit(1); console.log(r[process.argv[2]+"Image"])' "$result" "$kind")
+            image="ghcr.io/$repository-$TRACK-$kind:$GITHUB_SHA"
+            docker tag "$id" "$image"
+            docker push "$image"
+            digest=$(docker image inspect "$image" --format '{{index .RepoDigests 0}}')
+            echo "$kind: $digest" >> "$GITHUB_STEP_SUMMARY"
+          done

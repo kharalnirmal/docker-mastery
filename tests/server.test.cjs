@@ -1,0 +1,17 @@
+const { test } = require('node:test');
+const assert = require('node:assert/strict');
+const { createPreviewServer } = require('../tools/serve.cjs');
+test('preview serves docs but blocks environment files, dependencies and backup artifacts', async () => {
+  const server = createPreviewServer();
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  const base = `http://127.0.0.1:${server.address().port}`;
+  try {
+    for (const url of ['/', '/assets/js/delivery.js', '/examples/delivery/README.md', '/examples/compose/prisma/.env.example']) {
+      assert.equal((await fetch(base + url)).status, 200, url);
+    }
+    for (const url of ['/examples/compose/prisma/.env', '/examples/compose/prisma/.env.release', '/examples/compose/drizzle/node_modules/next/package.json', '/tests/results/recovery-prisma.json', '/backup.dump', '/%2eenv', '/.git/config']) {
+      assert.equal((await fetch(base + url)).status, 403, url);
+    }
+    assert.equal((await fetch(base + '/missing')).status, 404);
+  } finally { await new Promise(resolve => server.close(resolve)); }
+});

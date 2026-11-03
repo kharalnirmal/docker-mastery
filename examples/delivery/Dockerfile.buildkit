@@ -1,0 +1,11 @@
+# syntax=docker/dockerfile:1
+# A fake secret proves mount boundaries; do not substitute real credentials here.
+FROM alpine:3 AS verify
+RUN --mount=type=cache,target=/var/cache/guide \
+    --mount=type=secret,id=demo,required=true \
+    test -s /run/secrets/demo && echo reviewed > /var/cache/guide/status && \
+    mkdir /result && echo 'Build secret was mounted, not copied.' > /result/proof.txt
+FROM alpine:3
+COPY --from=verify /result/proof.txt /proof.txt
+USER 1000:1000
+CMD ["cat", "/proof.txt"]

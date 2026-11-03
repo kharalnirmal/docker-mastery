@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300" role="img" aria-labelledby="title desc">
+  <title id="title">Docker artifact delivery and separate database recovery</title>
+  <desc id="desc">Commit builds app and tools images. Local tests check exact image IDs. Approved publishing records registry digests and supply-chain evidence. Staging and single-host deployment consume the same digest. Backup and migration remain separate controlled actions.</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#334155"/></marker></defs>
+  <rect width="960" height="300" rx="18" fill="#f8fafc"/>
+  <g font-family="sans-serif" font-size="17" fill="#0f172a" text-anchor="middle">
+    <g fill="#dbeafe" stroke="#2563eb" stroke-width="2"><rect x="20" y="55" width="190" height="95" rx="10"/><rect x="260" y="55" width="190" height="95" rx="10"/><rect x="500" y="55" width="190" height="95" rx="10"/><rect x="740" y="55" width="200" height="95" rx="10"/></g>
+    <text x="115" y="88">Reviewed commit</text><text x="115" y="119">Build app + tools</text>
+    <text x="355" y="88">Local checks</text><text x="355" y="119">Exact image IDs</text>
+    <text x="595" y="88">Approved registry</text><text x="595" y="119">Digests + evidence</text>
+    <text x="840" y="88">Staging → release</text><text x="840" y="119">Same digest</text>
+    <rect x="225" y="210" width="510" height="60" rx="10" fill="#fef3c7" stroke="#a16207" stroke-width="2"/>
+    <text x="480" y="246">Database: verified backup → controlled migration</text>
+  </g>
+  <g fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"><path d="M210 102H255"/><path d="M450 102H495"/><path d="M690 102H735"/><path d="M735 240H840V155"/></g>
+</svg>

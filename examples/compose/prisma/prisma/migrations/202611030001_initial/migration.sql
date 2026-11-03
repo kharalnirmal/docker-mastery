@@ -1,0 +1,10 @@
+CREATE TABLE "Project" ("id" TEXT PRIMARY KEY, "name" TEXT NOT NULL);
+CREATE TABLE "Member" ("id" TEXT PRIMARY KEY, "name" TEXT NOT NULL);
+CREATE TABLE "Task" (
+  "id" TEXT PRIMARY KEY,
+  "title" VARCHAR(120) NOT NULL,
+  "done" BOOLEAN NOT NULL DEFAULT false,
+  "projectId" TEXT NOT NULL REFERENCES "Project"("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+  "assigneeId" TEXT REFERENCES "Member"("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+CREATE INDEX "Task_projectId_idx" ON "Task"("projectId");

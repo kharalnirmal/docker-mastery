@@ -1,0 +1,9 @@
+# Requires the secure overlay and the selected ORM's base Compose file.
+# Pull-only release: no app/tools build on the deployment host.
+services:
+  app:
+    image: ${APP_IMAGE:?Set the reviewed app image reference including @sha256 digest}
+    build: !reset null
+  tools:
+    image: ${TOOLS_IMAGE:?Set the matching tools image reference including @sha256 digest}
+    build: !reset null

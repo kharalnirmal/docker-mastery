@@ -1,0 +1,17 @@
+*.dump
+recovery-backup*/
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+generated/
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+# Local artwork with unverified redistribution rights; public UI uses SVGs.
+assets/images/naruto.jpg
+assets/images/sasuke.jpg
+assets/images/sakura.jpg

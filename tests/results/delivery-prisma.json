@@ -1,0 +1,18 @@
+{
+  "track": "prisma",
+  "project": "guide-delivery-prisma-1793687510046",
+  "context": "desktop-linux",
+  "checkedAt": "2026-11-03T06:31:50.092Z",
+  "checks": [
+    "schema/client generation with remediated tooling",
+    "controlled migration failure preserves business rows and verified ORM history",
+    "verified lab-only conflict removal, explicit Prisma reconciliation, retry and repeat deploy",
+    "read-only non-root runtime, dropped capabilities, writable tmpfs, resource/log limits and real API writes",
+    "SIGTERM stop without forced kill or OOM; process restarts healthy",
+    "pull-only release overlay recreates same artifact and retains database writes"
+  ],
+  "appImage": "sha256:26b0304dc0bb85c9a8d55312a77a08f8d59bb7043186f8e7efc75a0c992a97e6",
+  "toolsImage": "sha256:dd09972a7383839df695f369d156943fb9176e1a5db6c7e91023611a4c9151c7",
+  "passed": true,
+  "cleaned": true
+}

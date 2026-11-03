@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Learn Docker from first container to Compose, recovery, secure builds and delivery. Windows-first, with equal Prisma and Drizzle tracks.">
+  <title>Docker Mastery · Hands-on Docker Learning</title>
+  <link rel="icon" href="assets/images/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/reference-design.css">
+  <link rel="stylesheet" href="assets/css/navigation.css">
+  <script src="assets/js/lessons.js" defer></script>
+  <script src="assets/js/foundations.js" defer></script>
+  <script src="assets/js/compose.js" defer></script>
+  <script src="assets/js/recovery.js" defer></script>
+  <script src="assets/js/delivery.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#reading">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Docker Mastery home"><img src="assets/images/mark.svg" alt="" width="28" height="28"><span><strong>Docker Mastery</strong></span><span class="logo-badge">DOCS</span></a>
+    <button id="search-trigger" aria-haspopup="dialog" aria-controls="search-dialog"><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg>Search docs…</span><kbd>Ctrl K</kbd></button>
+    <div class="header-actions"><nav class="header-nav" aria-label="Quick navigation"><a href="#first-container">Docs</a><a href="#command-reference">Cheatsheet</a></nav><span class="header-divider" aria-hidden="true"></span><a class="header-github" href="https://github.com/kharalnirmal" aria-label="GitHub profile"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 22v-4c-4 1-5-2-6-2m12 6v-4c0-1-.3-2-1-2.5 4-.4 7-2 7-6a5 5 0 0 0-1.5-3.5c.3-1 .3-2-.2-3-1 0-2 .5-3 1a13 13 0 0 0-8 0c-1-.5-2-1-3-1-.5 1-.5 2-.2 3A5 5 0 0 0 3 9.5c0 4 3 5.6 7 6-.7.5-1 1.5-1 2.5"/></svg></a><button id="theme" aria-label="Switch to dark theme">Dark mode</button><button id="menu" aria-label="Open lesson navigation" aria-controls="sidebar" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  </header>
+  <main id="home" class="landing" tabindex="-1">
+    <div class="landing-inner">
+      <div class="landing-hero" role="group" aria-label="The learning team">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-stack"><img class="hero-main" src="assets/images/developer.svg" alt="Original illustration representing the application developer"><img class="hero-side-a" src="assets/images/reviewer.svg" alt="Original illustration representing the code reviewer"><img class="hero-side-b" src="assets/images/reliability.svg" alt="Original illustration representing the reliability engineer"></div>
+        <div class="hero-caption"><span aria-hidden="true">⌘</span> Hidden Leaf Dev Team</div>
+      </div>
+      <div class="landing-content">
+        <div class="landing-badge"><span aria-hidden="true">✦</span> Naruto Edition</div>
+        <h1>Master <span>Docker</span><br>with real-world<br class="desktop-break"> examples</h1>
+        <p class="intro">Learn with Naruto's team. Real apps, practical labs, and every command explained — from your first container onward.</p>
+        <div class="landing-features"><div class="feature-card"><span class="feature-icon" aria-hidden="true">▤</span><strong id="lesson-count">20 lessons</strong><span>Docker + Compose</span></div><div class="feature-card"><span class="feature-icon" aria-hidden="true">✓</span><strong>100%</strong><span>Free to read</span></div><div class="feature-card"><span class="feature-icon" aria-hidden="true">⌁</span><strong>Hands-on</strong><span>Mission based</span></div></div>
+        <nav class="landing-chips" aria-label="Choose a learning path"><a href="#first-container">◇ Containers</a><a href="#first-dockerfile">▱ Dockerfile</a><a href="#troubleshooting">⌕ Debugging</a></nav>
+        <div class="landing-bottom"><a class="primary" href="#first-container"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 5c3-3 6-3 6-3s0 3-3 6l-6 6-4-4Z"/><path d="m7 10-4 1 3-5 5-1m0 9-1 4 5-3 1-5M6 15l-3 6 6-3"/></svg>Begin the Mission <span aria-hidden="true">→</span></a></div>
+        <div class="creator-profile">
+          <span class="creator-avatar" aria-hidden="true">NK</span>
+          <span class="creator-info"><small>Created by</small><strong>Nirmal Kharal</strong></span>
+          <nav class="creator-socials" aria-label="Creator social profiles">
+            <a href="https://github.com/kharalnirmal" target="_blank" rel="noopener noreferrer" title="GitHub (opens in a new tab)" aria-label="Nirmal Kharal on GitHub (opens in a new tab)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+            <a href="https://www.linkedin.com/in/kharalnirmal/" target="_blank" rel="noopener noreferrer" title="LinkedIn (opens in a new tab)" aria-label="Nirmal Kharal on LinkedIn (opens in a new tab)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="https://www.instagram.com/nirmalkharal/" target="_blank" rel="noopener noreferrer" title="Instagram (opens in a new tab)" aria-label="Nirmal Kharal on Instagram (opens in a new tab)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </nav>
+        </div>
+        <p class="scope">Docker · Compose · Recovery · Secure delivery.<br>No login required. Optional AI. Choose Prisma or Drizzle.</p>
+      </div>
+    </div>
+  </main>
+  <div id="workspace" class="workspace" hidden>
+    <div id="backdrop" hidden></div>
+    <aside id="sidebar" aria-label="Lesson navigation" tabindex="-1">
+      <div class="sidebar-top"><span class="eyebrow">DOCKER DOCUMENTATION</span><button id="close-menu" aria-label="Close lesson navigation">✕</button></div>
+      <nav id="lesson-nav" aria-label="Lessons"></nav>
+      <div class="roadmap"><p class="eyebrow">DOCKER LEARNING PATH</p><p>Build → Compose → recover → secure → deliver.</p><p>One ORM per project: Prisma <strong>or</strong> Drizzle, equally supported.</p></div>
+      <a class="home-link" href="#home">← Back to field guide</a>
+    </aside>
+    <main id="reading" tabindex="-1"><article id="lesson"></article></main>
+    <aside class="contents" aria-label="On this page"><p class="eyebrow">ON THIS PAGE</p><nav id="toc"></nav><div class="mentor"><span class="eyebrow">KAKASHI'S NOTE</span><p>Explain the command before you run it. A small verified step beats a clever guess.</p></div></aside>
+  </div>
+  <dialog id="search-dialog" aria-labelledby="search-title">
+    <div class="search-dialog-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><label id="search-title" class="sr-only" for="search">Search documentation</label><input id="search" type="search" placeholder="Search documentation…" autocomplete="off"><button id="close-search" aria-label="Close search">Esc</button></div>
+    <p id="search-status" role="status" aria-live="polite"></p>
+    <nav id="search-results" aria-label="Search results"></nav>
+    <div class="search-dialog-footer"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span></div>
+  </dialog>
+  <div id="copy-status" class="sr-only" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">This prototype needs JavaScript for lesson navigation. Runnable files and instructions are available in the project README.</p></noscript>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "track": "drizzle",
+  "project": "guide-delivery-drizzle-1793687510048",
+  "context": "desktop-linux",
+  "checkedAt": "2026-11-03T06:31:50.093Z",
+  "checks": [
+    "schema/client generation with remediated tooling",
+    "controlled migration failure preserves business rows and verified ORM history",
+    "verified lab-only conflict removal, explicit Prisma reconciliation, retry and repeat deploy",
+    "read-only non-root runtime, dropped capabilities, writable tmpfs, resource/log limits and real API writes",
+    "SIGTERM stop without forced kill or OOM; process restarts healthy",
+    "pull-only release overlay recreates same artifact and retains database writes"
+  ],
+  "appImage": "sha256:d4ca97feffff7489cd9653bd8d26c5f3596f2719f16fe431353fdaa625ee9f28",
+  "toolsImage": "sha256:49d287058cebc7fa0071c81ee87e26ccc5bcbeabc00ad327225aaf8b3cdf2a70",
+  "passed": true,
+  "cleaned": true
+}

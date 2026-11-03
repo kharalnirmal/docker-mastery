@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="300" viewBox="0 0 880 300" role="img" aria-labelledby="title desc">
+  <title id="title">Next.js and PostgreSQL Compose stack</title>
+  <desc id="desc">The host browser reaches Next.js over loopback port 3000. Inside the Compose network, only the server connects to db port 5432. Database data lives in the pgdata volume.</desc>
+  <rect width="880" height="300" rx="12" fill="#f5f8ff"/>
+  <g font-family="system-ui,sans-serif" fill="#172033" text-anchor="middle">
+    <rect x="270" y="28" width="585" height="246" rx="10" fill="#e7efff" stroke="#557ac4" stroke-dasharray="6 4"/>
+    <text x="560" y="53" font-size="16">Compose network · database not published on host</text>
+    <rect x="20" y="94" width="170" height="90" rx="8" fill="white" stroke="#557ac4"/>
+    <text x="105" y="130" font-size="19">Host browser</text><text x="105" y="157" font-size="13">localhost:3000</text>
+    <rect x="295" y="94" width="210" height="90" rx="8" fill="white" stroke="#557ac4"/>
+    <text x="400" y="125" font-size="19">Next.js · app:3000</text><text x="400" y="154" font-size="13">Server-only ORM + pool</text>
+    <rect x="615" y="94" width="210" height="90" rx="8" fill="white" stroke="#557ac4"/>
+    <text x="720" y="125" font-size="19">PostgreSQL · db:5432</text><text x="720" y="154" font-size="13">SQL and constraints</text>
+    <text x="720" y="235" font-size="16">pgdata · durable named volume</text>
+    <text x="241" y="113" font-size="12">HTTP</text><text x="560" y="113" font-size="12">SQL</text>
+  </g>
+  <g stroke="#245bba" fill="none" stroke-width="2"><path d="M190 140h102m-10-6 10 6-10 6M505 140h107m-10-6 10 6-10 6M720 184v32m-6-10 6 10 6-10"/></g>
+</svg>
