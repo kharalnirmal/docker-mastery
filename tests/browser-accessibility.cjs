@@ -17,7 +17,7 @@ run('set', 'viewport', '390', '844');
 run('set', 'media', 'light', 'reduced-motion');
 assert.equal(evaluate(`matchMedia('(prefers-reduced-motion: reduce)').matches && getComputedStyle(document.querySelector('.hero-main')).transitionDuration === '0s'`), true);
 for (const theme of ['light', 'dark']) {
-  for (const route of ['home', 'first-container', 'first-dockerfile', 'compose-stack', 'docker-capstone']) {
+  for (const route of ['home', 'first-container', 'first-dockerfile', 'command-reference', 'compose-stack', 'docker-capstone']) {
     run('open', `http://127.0.0.1:4173/#${route}`);
     evaluate(`document.documentElement.dataset.theme = '${theme}'`);
     const result = JSON.parse(run('a11y', '--json'));

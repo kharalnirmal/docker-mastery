@@ -26,6 +26,10 @@ The dependency-free tests check lesson structure, file parity, local links,
 safety patterns and whitespace. They do not execute Docker or substitute for
 browser tests. See `CONTENT-REVIEW.md` and `tests/BROWSER-CHECKLIST.md`.
 
+Use the [operations runbook](docs/OPERATIONS-RUNBOOK.md) for read-only triage and
+incident handoffs, and the [completion checklist](docs/COMPLETION-CHECKLIST.md) to
+separate learner evidence, maintainer checks and optional public-production gates.
+
 With agent-browser installed and the preview running, execute
 `node tests/browser-check.cjs` for the seven-viewport navigation smoke suite.
 `node tests/browser-touch.cjs` checks trusted Chromium-emulated touch input.
@@ -54,11 +58,11 @@ With agent-browser installed and the preview running, execute
   [the delivery checkpoint](examples/delivery/README.md).
 - Preview-server tests block environment files, dependencies and backup artifacts.
 
-The design uses split onboarding, stacked original team illustrations, orange
-accents, feature cards and blue documentation navigation. No runtime external
-font/icon CDN or framework is needed. Unverified third-party character artwork
-is excluded from the public repository; technical diagrams and team illustrations
-are original SVGs. Font licenses are bundled alongside their files.
+The design uses split onboarding, optimized owner-supplied Naruto/Sakura/Sasuke
+portraits, orange accents, feature cards and blue documentation navigation. No
+runtime external font/icon CDN or framework is needed. Character-art redistribution
+rights remain unverified; see [NOTICE.md](NOTICE.md). Technical diagrams and the
+retained abstract team illustrations are original SVGs. Font licenses are bundled.
 
 ## Lab boundary
 

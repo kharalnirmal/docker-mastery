@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'dist');
 const marker = '.docker-mastery-build';
 function publicFile(file) {
-  if (!/^(?:index\.html|README\.md|NOTICE\.md|CONTENT-REVIEW\.md|LAB-VALIDATION\.md|assets\/|examples\/)/.test(file)) return false;
+  if (!/^(?:index\.html|README\.md|NOTICE\.md|CONTENT-REVIEW\.md|LAB-VALIDATION\.md|assets\/|examples\/|docs\/)/.test(file)) return false;
   return !file.split('/').some(part =>
     ['node_modules', '.next', 'generated', 'results', '.git'].includes(part) ||
     (part.startsWith('.') && !['.env.example', '.dockerignore'].includes(part)) ||

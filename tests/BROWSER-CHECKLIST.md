@@ -28,6 +28,10 @@ Record actual results and limitations in `CONTENT-REVIEW.md`.
 Automated smoke suites: `node tests/browser-check.cjs` (seven viewports and twenty
 lesson pages) and `node tests/browser-touch.cjs` (trusted Chromium touch emulation).
 These do not replace manual zoom/contrast review or physical-device testing.
+`node tests/browser-accessibility.cjs` scans representative pages in both themes
+and checks reduced-motion/200% CSS-zoom reachability. The primer and glossary
+section URLs must load directly, retain visible focus and fit at mobile width.
+Operations and completion-checklist links must resolve in the static export.
 
 Docker-only scope: verify the home title/brand and sidebar contain no cluster
 roadmap. Search `BuildKit`, `rootless`, `GHCR` and `capstone`; open the delivery

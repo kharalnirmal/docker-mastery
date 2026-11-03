@@ -42,6 +42,8 @@ run('set', 'viewport', '390', '844');
 run('click', '#search-trigger');
 run('fill', '#search', 'OOM');
 check(`document.querySelectorAll('#search-results a').length >= 1 && [...document.querySelectorAll('#search-results a')].some(a => a.getAttribute('href') === '#troubleshooting')`);
+run('fill', '#search', 'RTO');
+check(`[...document.querySelectorAll('#search-results a')].some(a => a.hash === '#command-reference')`);
 run('fill', '#search', 'no-such-lesson');
 check(`document.querySelectorAll('#search-results a').length === 0 && document.getElementById('search-status').textContent === '0 lessons found'`);
 run('fill', '#search', '');
@@ -81,6 +83,10 @@ for (const width of [320, 768, 1440]) {
   run('set', 'viewport', String(width), '900');
   run('open', 'http://127.0.0.1:4173/#first-dockerfile/files');
   check(`[...document.querySelectorAll('.instruction-table td:first-child code')].every(el => { const range = document.createRange(); range.selectNodeContents(el); return range.getClientRects().length === 1 && getComputedStyle(el).whiteSpace === 'nowrap'; }) && [...document.querySelectorAll('.instruction-table td')].every(el => getComputedStyle(el).verticalAlign === 'top') && document.documentElement.scrollWidth <= innerWidth`);
+}
+for (const [lesson, section] of [['first-container', 'terminal-basics'], ['command-reference', 'glossary']]) {
+  run('open', `http://127.0.0.1:4173/#${lesson}/${section}`);
+  check(`document.getElementById('${section}').getBoundingClientRect().top >= 50 && document.documentElement.scrollWidth <= innerWidth`);
 }
 run('open', 'http://127.0.0.1:4173/#not-found');
 check(`document.querySelector('article h1').textContent === 'Lesson not found'`);

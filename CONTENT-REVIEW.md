@@ -376,3 +376,49 @@ browser-text-zoom review, physical devices, native cross-platform and ARM64
 execution, and public registry/VPS/TLS/production-authentication verification.
 No public infrastructure or paid resource was created. These are not silently
 treated as complete or required to read/run the local Docker curriculum.
+
+## Documentation completeness follow-up (1.0.1)
+
+User asked whether anything remained to add to the documentation and authorized
+finishing those gaps. Kept the existing 20-lesson Docker-only curriculum and
+runnable application unchanged; this is an instructional/editorial completion,
+not an expansion into public infrastructure or a claim of complete production
+verification.
+
+- Added a first-lesson beginner primer for Bash versus PowerShell, prompts,
+  working directories/paths, quoting, arguments/operators, exit statuses,
+  processes/signals, networking, YAML/JSON/env files and CPU architecture.
+- Added a command-reference glossary, searchable terminology keywords, and
+  direct section links. Increased the affected reading-time estimates.
+- Added docs/OPERATIONS-RUNBOOK.md: ownership/configuration inventory, bounded
+  read-only diagnostics, health/readiness interpretation, one controlled DB
+  interruption, recovery/release boundaries and a reusable incident report.
+- Added docs/COMPLETION-CHECKLIST.md: learner self-sign-off, maintainer evidence,
+  optional public-production gates and documentation maintenance guidance.
+  Learner boxes intentionally remain unchecked; author tests are not learner
+  exercise completion or infrastructure/legal approval.
+- Linked both documents from the reference, capstone, README and validation
+  guide, included docs in the static export, and added Markdown-link/hand-off
+  tests. Corrected stale claims that Compose remained unfinished, the project
+  was not a Git repository, and public character artwork was excluded.
+
+Official references fetched 2026-11-03: GNU Bash Reference Manual 5.3
+(https://www.gnu.org/software/bash/manual/bash.html), reviewed quoting, expansion,
+lists, functions and statuses; Docker Compose logs CLI reference
+(https://docs.docker.com/reference/cli/docker/compose/logs/), reviewed --tail
+per-container semantics, --since and --timestamps. The split-page Bash fetch
+failed at transport; the complete official manual was successfully retrieved.
+
+Observed: PASS 16 Node tests; PASS seven-viewport/all-20-lesson browser suite,
+new primer/glossary deep links and RTO search; PASS axe 4.12.1 across six pages
+including the glossary in both themes (zero violations, manual-review rules
+retained); PASS reduced-motion and 200% CSS-zoom reachability checks. No runnable
+lab files/dependencies changed; the fresh eight-runner local Docker/ORM evidence
+in the preceding release remains applicable, not misrepresented as a second
+execution during this documentation-only follow-up.
+PASS static rebuild: 104 public files, 2.37 MiB, including both new handoff
+documents and all evaluated lesson asset/document links.
+
+This closes the identified local documentation backlog. The optional external
+infrastructure, native-platform/physical-device/manual accessibility and artwork
+rights gates remain explicitly unverified in the completion checklist.

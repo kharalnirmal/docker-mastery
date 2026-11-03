@@ -12,6 +12,8 @@ through Compose, database recovery, secure builds, and controlled delivery.
 
 [Get started](#quick-start) · [Learning path](#learning-path) · [Runnable labs](#runnable-labs) · [Validation](#testing-and-validation) · [Safety](#safety-and-scope)
 
+[Operations runbook](docs/OPERATIONS-RUNBOOK.md) · [Completion checklist](docs/COMPLETION-CHECKLIST.md)
+
 ## Why this guide?
 
 - **Learn by doing:** run containers, build images, trace requests, and diagnose failures.
@@ -69,6 +71,12 @@ Windows-client/Linux-AMD64; it is not certification for every OS or architecture
 Progress at your own pace. Experienced developers can use lesson prerequisites
 and checkpoints to jump to the area they need.
 
+New to the terminal? Begin with the [Bash, paths and networking primer](index.html#first-container/terminal-basics).
+For terminology, use the [searchable command-reference glossary](index.html#command-reference/glossary).
+Finish by filling in the [operations/incident runbook](docs/OPERATIONS-RUNBOOK.md)
+and your own [completion checklist](docs/COMPLETION-CHECKLIST.md). The checklist
+clearly separates this complete local course from optional public-production gates.
+
 ## Choose your ORM track
 
 The task tracker lets you create, list, assign, and complete tasks using demo
@@ -103,6 +111,7 @@ instructions before copying it into `.github/workflows/`.
 docker-mastery/
 ├── index.html             # Static learning guide
 ├── assets/                # Lessons, styles, fonts, and original illustrations
+├── docs/                  # Operations/incident runbook and completion checklist
 ├── examples/
 │   ├── docker/            # Small image-building checkpoint
 │   ├── compose/           # Independent Prisma and Drizzle applications
@@ -132,7 +141,7 @@ workflow runs the Node tests and static build on pushes and pull requests.
 
 Recorded local verification includes:
 
-- **14 passing Node tests** covering content, links, file parity, artwork budgets, safe exports, and preview restrictions.
+- **16 passing Node tests** covering content, links, file parity, documentation handoffs, artwork budgets, safe exports, and preview restrictions.
 - Browser checks across **seven viewport sizes**, all 20 lessons at mobile width,
   keyboard navigation, search, themes, and trusted emulated touch.
 - Container/image/network/volume checks and BuildKit secret/cache boundaries.

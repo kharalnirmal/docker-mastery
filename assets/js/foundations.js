@@ -133,12 +133,12 @@ docker volume ls</code></pre>
         <p>Primary references: <a href="https://docs.docker.com/engine/storage/volumes/">volumes and backup/restore</a>, <a href="https://docs.docker.com/engine/storage/bind-mounts/">bind mounts</a>, <a href="https://docs.docker.com/engine/storage/tmpfs/">tmpfs</a>. Next: practice evidence-led troubleshooting; database persistence and Compose will build on these concepts.</p>`
     },
     {
-      id: 'command-reference', title: 'Docker command field reference', navTitle: 'Command cheatsheet', group: 'Reference', level: 'Optional', minutes: 10,
-      description: 'Find a command by task, with its scope, risks and links back to the full explanation.',
-      keywords: 'cheatsheet commands flags reference run start stop rm logs inspect network volume build',
+      id: 'command-reference', title: 'Docker command field reference', navTitle: 'Commands & glossary', group: 'Reference', level: 'Optional', minutes: 20,
+      description: 'Find commands and glossary definitions by task, with scope, risks and links to the full explanation.',
+      keywords: 'cheatsheet commands flags reference run start stop rm logs inspect network volume build glossary RPO RTO SLO SBOM provenance digest registry repository daemon context bind mount tmpfs migration seed health readiness liveness rollback',
       html: `
         <h2 id="prepare">1. Use this after the lessons</h2>
-        <p>Prerequisites: complete the relevant lab before reusing a command. Estimated effort: 10 minutes. The problem is recall, not learning unfamiliar flags from a wall of commands. Names below refer only to your known disposable lab. Use WSL Bash, macOS Terminal or Linux Bash. No paid infrastructure is involved.</p>
+         <p>Prerequisites: complete the relevant lab before reusing a command. Estimated effort: 20 minutes. The problem is recall, not learning unfamiliar flags from a wall of commands. Names below refer only to your known disposable lab. Use WSL Bash, macOS Terminal or Linux Bash. No paid infrastructure is involved.</p>
         <h2 id="inspect">2. Inspect before changing state</h2>
         <pre><code>docker context show
 docker version
@@ -158,8 +158,26 @@ docker ps -a</code></pre>
         <h2 id="practice">7. Recall without guessing</h2>
         <p><strong>Guided:</strong> find the read-only command for checking an exited container. <strong>Independent:</strong> explain what changes when you replace a host port, and what does not. For cleanup, return to the lab you actually created rather than copying another lab's names.</p>
         <details><summary>Optional AI exercise</summary><p>Ask an assistant for one read-only diagnostic for a sanitized error. Explain its flags yourself before running it. Manual path: choose the task above and open the linked lesson.</p></details>
-        <h2 id="references">8. Checkpoint and official references</h2>
-        <p>Can you identify the daemon target, resource scope and destructive effect before using any command here? Primary reference: <a href="https://docs.docker.com/reference/cli/docker/">Docker CLI reference</a>. Continue with the published lessons; the full Next.js/Compose phase is still in progress, not an implied completed course.</p>`
+         <h2 id="glossary">Glossary: distinguish the similar words</h2>
+         <div class="table-wrap"><table><thead><tr><th>Term</th><th>Meaning and common confusion</th></tr></thead><tbody>
+         <tr><td>Image / container</td><td>Packaged filesystem/configuration / running or stopped instance with a writable layer. Stopping is not removal.</td></tr>
+         <tr><td>Client / daemon / context</td><td>CLI / engine managing resources / selected engine connection. A local CLI can target a remote daemon.</td></tr>
+         <tr><td>Registry / repository / tag / digest</td><td>Image service / named image collection / movable label / content identity. A source Git repository stores code, not container images.</td></tr>
+         <tr><td>Build context / Dockerfile / layer</td><td>Files available to a build / build instructions / filesystem change. Excluding a secret from the context is safer than deleting it in a later layer.</td></tr>
+         <tr><td>Stage / target / cache</td><td>Named build phase / selected output stage / reusable build results. Cache is disposable, not application persistence.</td></tr>
+         <tr><td>Bind mount / named volume / tmpfs</td><td>Specific host path / engine-managed durable storage / ephemeral in-memory filesystem. None is automatically a backup.</td></tr>
+         <tr><td>Published port / EXPOSE / DNS</td><td>Host forwarding / image documentation / hostname resolution. A healthy container need not have a published port.</td></tr>
+         <tr><td>Compose service / project / profile</td><td>One service definition / resource namespace / opt-in group. A project name does not reserve a host port.</td></tr>
+         <tr><td>Environment / build argument / secret mount</td><td>Process configuration / build input / temporary build-time secret file. Environment and build arguments are not safe secret stores.</td></tr>
+         <tr><td>Health / readiness / liveness</td><td>Reported check status / ability to serve dependency-backed work / process-level ability to continue. Compose health alone does not trigger restart.</td></tr>
+         <tr><td>Schema / migration / seed</td><td>Database structure / reviewed change history / initial demo rows. Repeating a seed must not erase existing work.</td></tr>
+         <tr><td>Backup / restore / rollback</td><td>Recovery copy / recovery from that copy / returning to an earlier release. An app rollback does not reverse SQL.</td></tr>
+         <tr><td>RPO / RTO / SLO</td><td>Target maximum data loss / target recovery duration / defined service reliability objective. Targets are not measured guarantees.</td></tr>
+         <tr><td>SBOM / scan / provenance / signature</td><td>Component inventory / known-vulnerability matching / build-origin claim / identity-bound authenticity. None alone proves a safe application.</td></tr>
+         </tbody></table></div>
+         <p>For commands to inspect a real incident and a fill-in handoff, use the <a href="docs/OPERATIONS-RUNBOOK.md">operations runbook</a>. Use the <a href="docs/COMPLETION-CHECKLIST.md">completion checklist</a> to record what you actually verified.</p>
+         <h2 id="references">8. Checkpoint and official references</h2>
+         <p>Can you identify the daemon target, resource scope and destructive effect before using any command here? Primary reference: <a href="https://docs.docker.com/reference/cli/docker/">Docker CLI reference</a>. Continue with <a href="#nextjs-postgres">the Next.js/PostgreSQL checkpoint</a>, then Compose, recovery and secure delivery. All 20 lessons are available; production and cross-platform validation limits are recorded separately.</p>`
     }
   ];
   const existing = window.LESSONS;
