@@ -13,6 +13,10 @@ test('preview serves docs but blocks environment files, dependencies and backup 
       assert.equal((await fetch(base + url)).status, 403, url);
     }
     assert.equal((await fetch(base + '/missing')).status, 404);
+    for (const url of ['/%ZZ', '/%E0%A4', '/%00', '/%0a']) {
+      assert.equal((await fetch(base + url)).status, 400, url);
+    }
+    assert.equal((await fetch(base + '/')).status, 200, 'malformed requests do not terminate the server');
     for (const method of ['POST', 'PUT', 'DELETE', 'OPTIONS']) {
       const response = await fetch(base + '/', { method });
       assert.equal(response.status, 405);
