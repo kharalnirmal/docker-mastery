@@ -119,5 +119,13 @@
     exercise: 'How could a malicious RUN leak a correctly mounted secret? Why must the missing-secret check use a cache miss to prove required=true is enforced?',
     reference: 'https://docs.docker.com/build/building/secrets/'
   });
+  guide({
+    lesson: 'secure-runtime', id: 'resource-budgets', title: 'Resource limits are different kinds of guardrail',
+    analogy: 'An apartment has a power allowance, storage capacity and occupancy limit. Slowing electricity use is not the same as evicting an occupant when capacity is exceeded.',
+    technical: 'CPU quotas usually throttle execution under pressure; a memory limit can lead to allocation failure or OOM termination. A PID limit constrains process/thread growth. Bounded logging limits retained Docker log files, not database growth. tmpfs uses memory and must be budgeted too. Non-root identity, dropped capabilities and a read-only filesystem restrict different actions; none replaces authentication or makes an unauthenticated tracker safe to publish. Exit 137 can follow a forced kill and is not sufficient OOM proof. Correlate OOMKilled, timestamps and observed usage before changing limits.',
+    steps: ['Measure application, database, temporary files and log needs separately.', 'Set CPU, memory, PID and log budgets for the owned workload.', 'Observe throttling, exits and selected inspect fields without dumping secrets.', 'Fix the evidenced cause and remeasure; do not default to root or unlimited resources.'],
+    exercise: 'An app is slow but alive; another exits with code 137. What evidence distinguishes CPU throttling from OOM or a manual kill? Why can a single stats snapshot miss a short peak?',
+    reference: 'https://docs.docker.com/engine/containers/resource_constraints/'
+  });
   // More guides can be added here.
 })();

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title description">
+  <title id="title">CPU, memory, PID and log limits differ</title><desc id="description">CPU pressure can throttle a running process. Memory exhaustion can cause OOM termination. PID limits restrict process growth and log rotation bounds retained log files. Exit 137 alone does not prove OOM.</desc>
+  <rect width="640" height="360" rx="16" fill="#f1f5f9"/>
+  <g font-family="sans-serif" font-size="18" text-anchor="middle" fill="#0f172a">
+    <text x="320" y="32" font-weight="bold">Do not diagnose all pressure as the same failure</text>
+    <rect x="24" y="62" width="280" height="98" rx="10" fill="#dbeafe" stroke="#1d4ed8"/><text x="164" y="93">CPU quota</text><text x="164" y="122">Throttling / slower work</text><text x="164" y="146" font-size="15">Process may remain alive</text>
+    <rect x="336" y="62" width="280" height="98" rx="10" fill="#ffedd5" stroke="#9a3412"/><text x="476" y="93">Memory limit</text><text x="476" y="122">Possible OOM termination</text><text x="476" y="146" font-size="15">Include tmpfs in the budget</text>
+    <rect x="24" y="185" width="280" height="98" rx="10" fill="#dbeafe" stroke="#1d4ed8"/><text x="164" y="216">PID limit</text><text x="164" y="245">Process / thread growth</text><text x="164" y="269" font-size="15">Creation can fail at the limit</text>
+    <rect x="336" y="185" width="280" height="98" rx="10" fill="#dcfce7" stroke="#15803d"/><text x="476" y="216">Log rotation</text><text x="476" y="245">Bound retained log files</text><text x="476" y="269" font-size="15">Does not bound database size</text>
+    <text x="320" y="331" font-size="16">Exit 137 alone ≠ proven OOM. Correlate evidence.</text>
+  </g>
+</svg>
