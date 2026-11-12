@@ -42,6 +42,9 @@ async function waitFor(url, status) {
     assert.equal(initial.tasks.length, 1);
     assert.equal(initial.members.length, 2); record('equivalent seeds and health endpoints');
     const send = (url, method, data) => fetch(base + url, { method, headers: { 'Content-Type': 'application/json', Origin: base }, body: JSON.stringify(data) });
+    assert.equal((await fetch(`${base}/api/tasks`, { method: 'POST', body: '{}' })).status, 415);
+    assert.equal((await send('/api/tasks', 'POST', { title: 'x'.repeat(17000) })).status, 413);
+    assert.equal((await fetch(`${base}/api/tasks`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{' })).status, 400);
     assert.equal((await send('/api/tasks', 'POST', { title: ' ' })).status, 400);
     assert.equal((await send('/api/tasks', 'POST', { title: 'Invalid', assigneeId: 'unknown' })).status, 400);
     assert.equal((await fetch(`${base}/api/tasks?offset=-1`)).status, 400);

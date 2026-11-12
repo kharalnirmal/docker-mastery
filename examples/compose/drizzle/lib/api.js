@@ -1,5 +1,6 @@
 import 'server-only';
 import * as store from './store.js';
+import { readJson } from './request.js';
 
 const json = (data, status = 200) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store' } });
 function validate(data, partial = false) {
@@ -21,7 +22,7 @@ async function write(request, context, partial) {
   const origin = request.headers.get('origin');
   if (origin && origin !== `${new URL(request.url).protocol}//${request.headers.get('host')}`) return json({ error: 'Cross-origin write rejected' }, 403);
   let data;
-  try { data = await request.json(); } catch { return json({ error: 'Invalid JSON' }, 400); }
+  try { data = await readJson(request); } catch (error) { return json({ error: error.message }, error.status || 400); }
   if (!validate(data, partial)) return json({ error: 'Invalid task fields' }, 400);
   try {
     const result = partial ? await store.update((await context.params).id, data) : await store.create(data);
