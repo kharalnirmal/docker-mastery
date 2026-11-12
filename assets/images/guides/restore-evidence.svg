@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title description">
+  <title id="title">Non-destructive restoration evidence</title><desc id="description">A preserved source database produces a protected dump. The dump is restored to a separate empty destination. Business rows and migration history are compared before calling the backup verified.</desc>
+  <rect width="640" height="360" rx="16" fill="#f1f5f9"/>
+  <g font-family="sans-serif" font-size="18" text-anchor="middle" fill="#0f172a">
+    <text x="320" y="32" font-weight="bold">Preserve the source; prove the destination</text>
+    <rect x="24" y="61" width="260" height="66" rx="10" fill="#dcfce7" stroke="#15803d"/><text x="154" y="88">Source database</text><text x="154" y="113" font-size="16">Keep untouched by restore</text>
+    <path d="M291 94h56m-8-6 8 6-8 6" fill="none" stroke="#334155" stroke-width="3"/>
+    <rect x="356" y="61" width="260" height="66" rx="10" fill="#dbeafe" stroke="#1d4ed8"/><text x="486" y="88">Protected pg_dump archive</text><text x="486" y="113" font-size="16">Identity + checksum + time</text>
+    <path d="M486 132v38m-6-7 6 7 6-7" fill="none" stroke="#334155" stroke-width="3"/>
+    <rect x="356" y="181" width="260" height="66" rx="10" fill="#dbeafe" stroke="#1d4ed8"/><text x="486" y="208">Separate empty DB</text><text x="486" y="233" font-size="16">Restore here, not over source</text>
+    <path d="M486 252v28H320v12" fill="none" stroke="#334155" stroke-width="3"/>
+    <text x="320" y="315">Compare business data + migration history</text><text x="320" y="342" font-size="15">Archive exists ≠ application recovery verified</text>
+  </g>
+</svg>
