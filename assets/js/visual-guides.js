@@ -31,5 +31,13 @@
     exercise: 'Explain why increasing the timeout cannot repair a program that ignores its signal. Which request and database evidence would demonstrate an orderly shutdown?',
     reference: 'https://docs.docker.com/reference/cli/docker/container/stop/'
   });
+  guide({
+    lesson: 'first-dockerfile', id: 'cache-invalidation', title: 'Cache invalidation follows changed inputs',
+    analogy: 'A bakery can reuse a prepared dough batch when only the packaging changes. Changing the flour recipe means remaking the dough and everything that depends on it.',
+    technical: 'A build cache result is reusable only when the instruction and its relevant inputs match. Copying package manifests and the lockfile before npm ci lets application-only edits reuse dependency installation. Copying the entire source first makes unrelated source changes invalidate that expensive step. Later dependent steps rebuild after a cache miss. Cache is a performance optimization: a clean build must still produce a correct application. Mutable base tags and unpinned downloads can change results even when your source did not change.',
+    steps: ['Copy dependency manifests and lockfile into the dependency stage.', 'Install the locked dependency graph.', 'Copy application source after dependency installation.', 'Compile again when source changes; reinstall too when dependency inputs change.'],
+    exercise: 'For a title-text edit versus a package-lock.json edit, predict which stages rebuild. Compare your prediction with build output before blaming a stale cache.',
+    reference: 'https://docs.docker.com/build/cache/invalidation/'
+  });
   // More guides can be added here.
 })();
