@@ -1,8 +1,8 @@
 {
   "track": "drizzle",
-  "project": "guide-delivery-drizzle-1793689403482",
+  "project": "guide-delivery-drizzle-1794453878465",
   "context": "desktop-linux",
-  "checkedAt": "2026-11-03T07:03:23.548Z",
+  "checkedAt": "2026-11-12T03:24:38.511Z",
   "checks": [
     "schema/client generation with remediated tooling",
     "controlled migration failure preserves business rows and verified ORM history",
@@ -11,8 +11,8 @@
     "SIGTERM stop without forced kill or OOM; process restarts healthy",
     "pull-only release overlay recreates same artifact and retains database writes"
   ],
-  "appImage": "sha256:73c62e144bc1acd62cfc65e1c9b8ee38ae52591b467f54c1581fb2985bd01f32",
-  "toolsImage": "sha256:06dbb90d257518e437f07225eccfbef4c4603dd7b14bb55d2fcccc547a1bc700",
+  "appImage": "sha256:924d521ed6a9343347e2f1c78342799b3ca38439a15be676264e7a4b6a7cbef7",
+  "toolsImage": "sha256:03200b8109280c28aafcedb20c581cdbaf3c99368d2c871dc7c6c837998233d1",
   "passed": true,
   "cleaned": true
 }

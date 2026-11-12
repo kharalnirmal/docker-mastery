@@ -135,5 +135,13 @@
     exercise: 'Two hosts pull the same tag on different days. Why might they run different bytes? Does knowing an exact digest prove that the image is nonmalicious?',
     reference: 'https://docs.docker.com/dhi/core-concepts/digests/'
   });
+  guide({
+    lesson: 'single-host-release', id: 'promotion-decision', title: 'Release the tested artifact, not a fresh guess',
+    analogy: 'A restaurant approves one prepared batch after tasting it. Cooking an unrelated batch after approval does not inherit the first batch\'s quality check.',
+    technical: 'The reviewed CI workflow tests changes without exposing release credentials to untrusted pull-request code. Publishing is an explicit approved action, not a side effect of reading this course. Record the tested app/tools identities and migrate once with the matching tools artifact. A release should promote the same reviewed artifact rather than rebuild silently on the server. Check process health, readiness and a real demo operation. If verification fails, select a previous image only after checking schema compatibility; otherwise stop and make a recovery decision. Single-host Compose still has host-level failure and maintenance downtime limits.',
+    steps: ['Review the change; pass tests and build the candidate without production secrets.', 'Approve publishing and record exact app/tools artifact identities.', 'Back up, apply the reviewed compatible migration once, and deploy the same candidate.', 'Verify behavior; accept the release or choose a compatible rollback with a separate data-recovery decision.'],
+    exercise: 'A new release is broken after adding a nullable field. What proves the previous app remains compatible? How would a destructive migration change the rollback decision?',
+    reference: 'https://docs.docker.com/compose/how-tos/production/'
+  });
   // More guides can be added here.
 })();

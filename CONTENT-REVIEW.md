@@ -1,5 +1,14 @@
 # Content and validation review
 
+## 2026-11-12 — code hardening and visual learning series
+
+See the [verified improvement record](docs/VERIFIED-IMPROVEMENTS.md) for the
+12 code/test changes, 16 original explanatory workflows, exact runtime checks,
+the initial Windows metadata-lock failures and successful sequential reruns,
+and ownership-scoped cleanup. Earlier test totals below are historical;
+the current Node suite contains 26 passing tests. This remains a local
+educational course, not public-production approval.
+
 Review date: 2026-11-03 (environment date). Reviewer: OpenCode assistant.
 This log retains chronological checkpoint evidence. The final Docker-only section
 supersedes earlier backlog/dependency statements; this is not production certification.

@@ -236,7 +236,7 @@ Public production deployment requires separate environment/security approval.
 Image rollback does not reverse SQL migrations. Keep this boundary explicit.
 
 See ../../../CONTENT-REVIEW.md for observed validation and remaining limits.
-# Log retention in both tracks
+## Log retention in both tracks
 
 All three services use Docker's `local` log driver with rotation (`max-size: "10m"`,
 `max-file: "3"`). The YAML anchor `&bounded-logs` defines this mapping once;

@@ -1,8 +1,8 @@
 {
   "track": "drizzle",
-  "project": "guide-recovery-drizzle-1793689347196",
+  "project": "guide-recovery-drizzle-1794453799034",
   "context": "desktop-linux",
-  "checkedAt": "2026-11-03T07:02:27.254Z",
+  "checkedAt": "2026-11-12T03:23:19.092Z",
   "checks": [
     "fresh history plus existing completed/assigned task",
     "custom archive copied to host; separate empty-database restore matches all business rows",
@@ -10,9 +10,9 @@
     "nullable-description migration and repeat deploy preserve existing rows",
     "unchanged standalone app reads existing data and creates rows after expansion"
   ],
-  "archive": "guide-recovery-drizzle-1793689347196.dump",
+  "archive": "guide-recovery-drizzle-1794453799034.dump",
   "archiveBytes": 7037,
-  "archiveSha256": "cc4b4f8768639d18edd7bbdbd02d592772dd3b8530a4dcfff442c246990e80fa",
+  "archiveSha256": "ecfec1bb2190d6e2759920c2b0293b1d5dbdff246d97108a21912638a2c7e216",
   "passed": true,
   "cleaned": true
 }
