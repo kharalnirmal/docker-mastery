@@ -19,6 +19,14 @@ test('preview serves docs but blocks environment files, dependencies and backup 
       assert.equal((await fetch(base + url)).status, 403, url);
     }
     assert.equal((await fetch(base + '/missing')).status, 404);
+    for (const url of ['/', '/missing', '/.git/config', '/%ZZ']) {
+      const response = await fetch(base + url);
+      assert.equal(response.headers.get('cache-control'), 'no-store');
+      assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
+      assert.equal(response.headers.get('referrer-policy'), 'no-referrer');
+      assert.equal(response.headers.get('x-frame-options'), 'DENY');
+      assert.equal(response.headers.get('cross-origin-resource-policy'), 'same-origin');
+    }
     for (const url of ['/%ZZ', '/%E0%A4', '/%00', '/%0a']) {
       assert.equal((await fetch(base + url)).status, 400, url);
     }
