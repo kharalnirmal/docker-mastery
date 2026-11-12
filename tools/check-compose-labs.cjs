@@ -3,6 +3,7 @@ const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const { finishReport } = require('./lab-report.cjs');
 const track = process.argv[2];
 assert.ok(['prisma', 'drizzle'].includes(track), 'Choose prisma or drizzle');
 const cwd = path.resolve(__dirname, `../examples/compose/${track}`);
@@ -84,10 +85,8 @@ async function waitFor(url, status) {
     try { console.error(compose('logs', 'app', 'db')); } catch {}
     process.exitCode = 1;
   } finally {
-    if (!process.argv.includes('--keep')) {
-      compose('down', '--volumes'); // Only uniquely named resources created above.
-      result.cleaned = true;
-    }
-    fs.writeFileSync(path.resolve(__dirname, `../tests/results/compose-${track}.json`), JSON.stringify(result, null, 2) + '\n');
+    finishReport(path.resolve(__dirname, `../tests/results/compose-${track}.json`), result,
+      process.argv.includes('--keep') ? null : () => compose('down', '--volumes'));
+    if (result.cleanupError) { console.error(result.cleanupError); process.exitCode = 1; }
   }
 })();
