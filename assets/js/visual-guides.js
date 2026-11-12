@@ -47,5 +47,13 @@
     exercise: 'If -f selects examples/delivery/Dockerfile.buildkit but the final argument is examples/delivery, where does COPY begin? Why does .gitignore alone not protect a build?',
     reference: 'https://docs.docker.com/build/building/context/'
   });
+  guide({
+    lesson: 'container-networks', id: 'two-address-books', title: 'Host ports and service DNS are two address books',
+    analogy: 'A customer uses the shop street address; employees call the warehouse by an internal extension. The internal extension is not a public postal address.',
+    technical: 'The browser uses the host-published loopback address. The app server uses db:5432 inside its Compose network. Here 127.0.0.1:3000:3000 means host bind address, host port, then container port. EXPOSE documents intent but does not publish a port. Inside a container, localhost identifies that container, not the host or another service. Docker service DNS is network-scoped; client-side JavaScript in a laptop browser cannot connect to the database using db as if it were public DNS. PostgreSQL remains unpublished.',
+    steps: ['The host browser requests the discovered loopback app port.', 'Docker forwards that connection to the app container port.', 'Server-side code resolves db on the Compose network.', 'PostgreSQL responds internally; the app returns only the intended HTTP data.'],
+    exercise: 'Trace a failed browser request separately from a failed app-to-database connection. Which hostname and port belong to each hop, and which hop never needs a published DB port?',
+    reference: 'https://docs.docker.com/compose/how-tos/networking/'
+  });
   // More guides can be added here.
 })();
