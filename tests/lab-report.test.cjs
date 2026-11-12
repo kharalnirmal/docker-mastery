@@ -3,7 +3,12 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { finishReport } = require('../tools/lab-report.cjs');
+const { finishReport, assertOwnership } = require('../tools/lab-report.cjs');
+test('cleanup requires an exact nonempty ownership label', () => {
+  assert.doesNotThrow(() => assertOwnership({ 'fieldguide.check': 'run-123' }, 'fieldguide.check', 'run-123'));
+  for (const labels of [undefined, {}, { 'fieldguide.check': 'other-run' }]) assert.throws(() => assertOwnership(labels, 'fieldguide.check', 'run-123'), /unowned/);
+  assert.throws(() => assertOwnership({}, 'fieldguide.check', undefined), /unowned/);
+});
 test('lab evidence survives cleanup failure and distinguishes retained resources', t => {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'guide-report-'));
   t.after(() => fs.rmSync(base, { recursive: true, force: true }));

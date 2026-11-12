@@ -10,4 +10,7 @@ function finishReport(file, result, cleanup) {
   fs.writeFileSync(file, JSON.stringify(result, null, 2) + '\n');
   return result;
 }
-module.exports = { finishReport };
+function assertOwnership(labels, key, expected) {
+  if (!expected || labels?.[key] !== expected) throw new Error('Refusing to remove an unowned resource');
+}
+module.exports = { finishReport, assertOwnership };
