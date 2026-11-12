@@ -11,6 +11,12 @@ function blockedPath(pathname) {
     /\.(?:dump|gz|tgz|zip|tar|pem|key|p12|pfx|log|bak|sqlite|db)$/i.test(part));
 }
 function createPreviewServer() { return http.createServer(async (req, res) => {
+  // Local edits must appear immediately; private paths must never enter caches.
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   if (!['GET', 'HEAD'].includes(req.method)) {
     res.writeHead(405, { Allow: 'GET, HEAD' }); return res.end('Method not allowed');
   }
