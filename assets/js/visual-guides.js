@@ -103,5 +103,13 @@
     exercise: 'Why is adding a nullable field safer than renaming a required field in one release? Name the compatibility proof needed before returning to an old image.',
     reference: 'https://www.prisma.io/docs/guides/data-migration'
   });
+  guide({
+    lesson: 'migration-failures', id: 'history-versus-data', title: 'Migration bookkeeping is not the database itself',
+    analogy: 'A construction checklist saying a wall was built is not the wall. Correcting a checkbox does not repair damaged brickwork, and rebuilding the wall does not automatically correct the checklist.',
+    technical: 'After failed SQL, inspect both actual schema/data and the selected ORM history. In this pinned lab, Prisma records an unfinished migration and requires deliberate reconciliation; the tested Drizzle PostgreSQL transaction rolls back without adding a successful history entry. These are observations for these tools and statements, not a universal promise that failed migrations leave nothing behind. Prisma resolve changes bookkeeping, not SQL. A real backfill or nontransactional operation may need a very different recovery plan. Preserve evidence and backups; never mark a migration applied simply to silence an error.',
+    steps: ['Stop additional migration attempts and capture the exact failure.', 'Inspect schema effects, business rows and migration history separately.', 'Review a repair or retry plan that matches the observed state.', 'Reconcile history only when justified, retry once, and verify retained business behavior.'],
+    exercise: 'A history table says failed, but some new rows exist. Why is blindly marking rolled back unsafe? What must you establish before replaying the migration?',
+    reference: 'https://www.prisma.io/docs/orm/prisma-migrate/workflows/troubleshooting'
+  });
   // More guides can be added here.
 })();
