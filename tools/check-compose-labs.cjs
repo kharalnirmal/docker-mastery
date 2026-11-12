@@ -58,6 +58,10 @@ async function waitFor(url, status) {
     assert.equal(updated.status, 200); assert.equal((await updated.json()).assigneeId, 'sakura');
     record('create, list, assignment, completion and invalid requests');
     const app = compose('ps', '-q', 'app').trim();
+    const logging = JSON.parse(docker('--context', 'desktop-linux', 'inspect', '--format', '{{json .HostConfig.LogConfig}}', app));
+    assert.equal(logging.Type, 'local');
+    assert.equal(logging.Config['max-size'], '10m');
+    assert.equal(logging.Config['max-file'], '3'); record('bounded local log rotation');
     assert.equal(docker('--context', 'desktop-linux', 'inspect', '--format', '{{.Config.User}}', app).trim(), 'node');
     assert.equal(compose('exec', '-T', 'app', 'id', '-u').trim(), '1000');
     const db = compose('ps', '-q', 'db').trim();

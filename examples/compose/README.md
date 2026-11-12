@@ -236,3 +236,13 @@ Public production deployment requires separate environment/security approval.
 Image rollback does not reverse SQL migrations. Keep this boundary explicit.
 
 See ../../../CONTENT-REVIEW.md for observed validation and remaining limits.
+# Log retention in both tracks
+
+All three services use Docker's `local` log driver with rotation (`max-size: "10m"`,
+`max-file: "3"`). The YAML anchor `&bounded-logs` defines this mapping once;
+`*bounded-logs` reuses it. This bounds each container's retained log files, not
+database size, host disk use, or logs written privately inside the application.
+Rotated history eventually disappears; capture sanitized incident evidence promptly.
+Existing containers need recreation through your original Compose configuration
+to adopt changed log settings; `restart` alone does not apply them. Do not delete
+database volumes. See the [local driver reference](https://docs.docker.com/engine/logging/drivers/local/).
