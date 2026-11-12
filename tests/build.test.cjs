@@ -1,6 +1,10 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { publicFile } = require('../tools/build.cjs');
+test('export accepts only canonical public paths', () => {
+  for (const file of ['README.md.bak.txt', 'assets/../private.txt', 'assets//file.js', 'assets/./file.js', 'assets\\private.txt', '/docs/file.md', 'docs/C:/file', 'docs/RESULTS/data.json', 'docs/archive.tar', 'docs/data.db', 'docs/secret\0.txt']) assert.equal(publicFile(file), false, file);
+  for (const file of ['docs/guide.md', 'examples/migrations/initial.sql']) assert.equal(publicFile(file), true, file);
+});
 test('static release includes public sources but excludes local and sensitive artifacts', () => {
   assert.equal(publicFile('docs/OPERATIONS-RUNBOOK.md'), true);
   assert.equal(publicFile('docs/.env'), false);
