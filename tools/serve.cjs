@@ -8,8 +8,11 @@ function createPreviewServer() { return http.createServer(async (req, res) => {
   if (!['GET', 'HEAD'].includes(req.method)) {
     res.writeHead(405, { Allow: 'GET, HEAD' }); return res.end('Method not allowed');
   }
+  let pathname;
+  try { pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname); }
+  catch { res.writeHead(400); return res.end('Bad request'); }
+  if (/[\x00-\x1f\x7f]/.test(pathname)) { res.writeHead(400); return res.end('Bad request'); }
   try {
-    const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const blocked = pathname.split(/[\\/]/).some(part =>
       ['node_modules', '.next', 'generated', '.git', 'results'].includes(part.toLowerCase()) ||
       (part.startsWith('.') && !['.env.example', '.dockerignore', '.gitignore'].includes(part)) ||
