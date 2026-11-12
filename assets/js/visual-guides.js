@@ -23,5 +23,13 @@
     exercise: 'Why can an ordinary Linux image not provide a Windows kernel? Identify what a kernel vulnerability could affect across the shared boundary.',
     reference: 'https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/'
   });
+  guide({
+    lesson: 'container-lifecycle', id: 'shutdown-signals', title: 'Graceful shutdown is a timed handover',
+    analogy: 'A restaurant closes its entrance, finishes accepted orders, then locks up. Cutting the electricity immediately can abandon orders already paid for.',
+    technical: 'Stopping is an opportunity to finish work, not proof that work finished. Docker sends the configured stop signal to the container main process; after the grace period it can force termination. Exec-form CMD avoids an unnecessary shell hiding the application from signals. The tracker uses init: true for signal forwarding and child reaping, plus a 30-second stop_grace_period. Those settings do not implement application-level draining or make database transactions safe automatically.',
+    steps: ['Stop sends the image-configured signal to the main process.', 'The application stops accepting work and finishes or rejects in-flight requests.', 'The application closes connections and exits before its deadline.', 'If the deadline expires, forced termination may interrupt work.'],
+    exercise: 'Explain why increasing the timeout cannot repair a program that ignores its signal. Which request and database evidence would demonstrate an orderly shutdown?',
+    reference: 'https://docs.docker.com/reference/cli/docker/container/stop/'
+  });
   // More guides can be added here.
 })();
