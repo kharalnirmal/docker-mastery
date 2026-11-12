@@ -71,5 +71,13 @@
     exercise: 'Why can changing APP_PORT alter publishing without defining APP_PORT inside the app? Explain why editing .env followed by restart may leave the running container unchanged.',
     reference: 'https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/'
   });
+  guide({
+    lesson: 'compose-stack', id: 'readiness-contract', title: 'Running, healthy and ready are different claims',
+    analogy: 'A restaurant may have its lights on while the kitchen cannot prepare food. Repeatedly switching the lights off and on does not repair the kitchen.',
+    technical: 'A running process can still fail real work. The tracker health endpoint proves the HTTP process responds; readiness also checks the database/schema dependency. depends_on with service_healthy coordinates initial startup but does not guarantee permanent database availability. A plain Compose healthcheck can mark a running container unhealthy; it does not by itself restart that container. Restart policies respond to process exit, not every unhealthy status. The application needs useful failure responses and dependency recovery, rather than a database outage causing endless process restarts.',
+    steps: ['Check process health independently of the database.', 'Check readiness for the dependency required to serve requests.', 'When the database is unavailable, report readiness failure and inspect its evidence.', 'After dependency recovery, confirm readiness and a real demo task operation.'],
+    exercise: 'Predict health, readiness and container status during the controlled database-stop lab. Why is a successful health response insufficient proof that creating a task works?',
+    reference: 'https://docs.docker.com/compose/how-tos/startup-order/'
+  });
   // More guides can be added here.
 })();
