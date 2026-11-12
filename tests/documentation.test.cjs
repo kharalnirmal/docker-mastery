@@ -24,11 +24,16 @@ test('beginner, glossary and operational handoffs are present and current', () =
   assert.match(read('docs/COMPLETION-CHECKLIST.md'), /intentionally start unchecked/);
 });
 test('public Markdown documentation local links resolve', () => {
-  for (const file of ['README.md', 'NOTICE.md', 'LAB-VALIDATION.md', 'docs/OPERATIONS-RUNBOOK.md', 'docs/COMPLETION-CHECKLIST.md']) {
+  const { execFileSync } = require('node:child_process');
+  const { publicFile } = require('../tools/build.cjs');
+  const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' }).split('\0').filter(file => file.endsWith('.md') && publicFile(file));
+  assert.ok(files.includes('examples/compose/README.md'), 'lab runbooks are checked too');
+  for (const file of files) {
     const markup = read(file).replace(/```[\s\S]*?```/g, '');
     for (const [, target] of markup.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
       if (/^(?:https?:|#)/.test(target)) continue;
       const destination = path.resolve(root, path.dirname(file), target.split('#')[0]);
+      assert.ok(destination === root || destination.startsWith(root + path.sep), `${file}: link leaves repository`);
       assert.ok(fs.existsSync(destination), `${file}: ${target}`);
     }
   }
