@@ -87,5 +87,13 @@
     exercise: 'Explain why setting a new NEXT_PUBLIC_API_URL at docker run may leave the old address visible in the browser. Which variable must never appear in a client bundle?',
     reference: 'https://nextjs.org/docs/app/guides/environment-variables'
   });
+  guide({
+    lesson: 'database-backups', id: 'restore-evidence', title: 'A backup is a claim until restoration is verified',
+    analogy: 'Owning a spare key is not proof it opens the door. Test it on the intended lock before an emergency, without throwing away the working key.',
+    technical: 'A successful pg_dump and a checksum establish useful evidence, but not complete recoverability. Restore into a separate empty database, preserve the original, and compare business rows, relationships and migration history. A tar copy of a live PostgreSQL data directory is not a substitute for a coordinated database backup. RPO is the acceptable data-loss interval; RTO includes detection, restoration and verification. Same-host restoration does not demonstrate recovery after host loss. Protect archives as sensitive data, and do not execute untrusted dump SQL casually.',
+    steps: ['Record the source, time, archive identity and intended recovery targets.', 'Create and protect the database-consistent archive; record its checksum.', 'Restore into a separate disposable destination without overwriting the source.', 'Verify tasks, assignments, completion and ORM history; record elapsed recovery time.'],
+    exercise: 'Would an hourly verified backup meet a five-minute RPO? What extra evidence would you need to claim host-loss recovery rather than a same-host restore?',
+    reference: 'https://www.postgresql.org/docs/18/backup-dump.html'
+  });
   // More guides can be added here.
 })();
