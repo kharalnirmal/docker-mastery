@@ -39,5 +39,13 @@
     exercise: 'For a title-text edit versus a package-lock.json edit, predict which stages rebuild. Compare your prediction with build output before blaming a stale cache.',
     reference: 'https://docs.docker.com/build/cache/invalidation/'
   });
+  guide({
+    lesson: 'first-dockerfile', id: 'context-boundary', title: 'The build context is a delivery boundary',
+    analogy: 'A courier can deliver only the documents inside the parcel. Marking a document as unused after sending the parcel does not make the original delivery private.',
+    technical: 'The final build argument selects the context, not necessarily the Dockerfile directory. COPY reads from that context unless an explicit stage is selected. The context-root .dockerignore filters local files before they are made available to the build. Keep .env files, database dumps and local dependencies out. A Dockerfile elsewhere does not grant COPY permission to read arbitrary parent directories. Copying a secret and deleting it in a later layer is unsafe because earlier layers can retain it. Git ignore rules are not Docker ignore rules.',
+    steps: ['Choose the smallest directory containing the intended build inputs.', 'Apply context-root .dockerignore before building.', 'COPY selects allowed inputs from that context or a named stage.', 'Inspect the final artifact; do not mistake a later deletion for secret removal.'],
+    exercise: 'If -f selects examples/delivery/Dockerfile.buildkit but the final argument is examples/delivery, where does COPY begin? Why does .gitignore alone not protect a build?',
+    reference: 'https://docs.docker.com/build/building/context/'
+  });
   // More guides can be added here.
 })();
