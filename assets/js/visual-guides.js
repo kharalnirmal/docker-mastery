@@ -63,5 +63,13 @@
     exercise: 'Predict which task data survives stop/start, container replacement, and explicit volume deletion. Why does a surviving volume still fail as a backup after host disk loss?',
     reference: 'https://docs.docker.com/engine/storage/'
   });
+  guide({
+    lesson: 'compose-stack', id: 'configuration-phases', title: 'Compose configuration happens in two phases',
+    analogy: 'An event planner fills in a seating-plan template before handing each guest a place card. The planner reading a name does not mean every guest receives every name.',
+    technical: 'Compose first interpolates expressions such as ${APP_PORT:-3000} from its interpolation environment. A shell variable can override a value from the selected env file. Later, service environment and env_file settings determine which values reach the container. A project .env file is not automatically copied wholesale into every service. Dockerfile ENV is another default that runtime configuration can replace. Keep the same project name, ordered -f files and --env-file selection across commands. config --quiet validates without printing resolved values; ordinary config output may expose secrets. Neither .env nor ENV is a production secret manager.',
+    steps: ['Select the project, Compose files and interpolation env file deliberately.', 'Compose resolves variable expressions into the service model.', 'Service environment settings provide values to the created container.', 'Recreate the owned container to apply changed runtime values; restart keeps the old configuration.'],
+    exercise: 'Why can changing APP_PORT alter publishing without defining APP_PORT inside the app? Explain why editing .env followed by restart may leave the running container unchanged.',
+    reference: 'https://docs.docker.com/compose/how-tos/environment-variables/variable-interpolation/'
+  });
   // More guides can be added here.
 })();
