@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 test('beginner, glossary and operational handoffs are present and current', () => {
   const context = { window: {} };
-  for (const script of ['lessons', 'foundations', 'compose', 'recovery', 'delivery']) vm.runInNewContext(read(`assets/js/${script}.js`), context);
+  for (const script of ['lessons', 'foundations', 'compose', 'recovery', 'delivery', 'visual-guides']) vm.runInNewContext(read(`assets/js/${script}.js`), context);
   const lessons = context.window.LESSONS;
   const first = lessons.find(lesson => lesson.id === 'first-container').html;
   assert.match(first, /id="terminal-basics"/);

@@ -11,7 +11,24 @@ vm.runInNewContext(read('assets/js/foundations.js'), context);
 vm.runInNewContext(read('assets/js/compose.js'), context);
 vm.runInNewContext(read('assets/js/recovery.js'), context);
 vm.runInNewContext(read('assets/js/delivery.js'), context);
+vm.runInNewContext(read('assets/js/visual-guides.js'), context);
 const lessons = context.window.LESSONS;
+test('visual guides have accessible original diagrams and text workflows', () => {
+  const source = read('assets/js/visual-guides.js');
+  const guides = [...source.matchAll(/lesson: '([^']+)', id: '([^']+)'/g)];
+  assert.ok(guides.length > 0);
+  for (const [, lesson, id] of guides) {
+    const html = lessons.find(entry => entry.id === lesson).html;
+    assert.ok(html.includes(`id="${id}"`));
+    assert.ok(html.includes('Workflow, also available as text:'));
+    const svg = read(`assets/images/guides/${id}.svg`);
+    assert.match(svg, /role="img" aria-labelledby="title description"/);
+    assert.match(svg, /<title id="title">[^<]+<\/title>/);
+    assert.match(svg, /<desc id="description">[^<]+<\/desc>/);
+    assert.match(svg, /viewBox="0 0 640 360"/);
+    assert.doesNotMatch(svg, /<script|<foreignObject|href="https?:/);
+  }
+});
 test('twenty distinct lessons with complete navigation metadata', () => {
   assert.equal(lessons.length, 20);
   assert.equal(new Set(lessons.map(l => l.id)).size, 20);

@@ -51,7 +51,7 @@ function build() {
   }
   // Fail before publication if the guide references an asset omitted from export.
   const context = { window: {} };
-  for (const script of ['lessons', 'foundations', 'compose', 'recovery', 'delivery']) {
+  for (const script of ['lessons', 'foundations', 'compose', 'recovery', 'delivery', 'visual-guides']) {
     vm.runInNewContext(fs.readFileSync(path.join(output, `assets/js/${script}.js`), 'utf8'), context);
   }
   const pages = [fs.readFileSync(path.join(output, 'index.html'), 'utf8'), ...context.window.LESSONS.map(lesson => lesson.html)];
