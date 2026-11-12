@@ -1,6 +1,12 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { createPreviewServer } = require('../tools/serve.cjs');
+const { createPreviewServer, blockedPath } = require('../tools/serve.cjs');
+test('preview rejects private artifacts and normalized target paths', () => {
+  for (const name of ['backup.gz', 'archive.tar', 'client.PFX', 'error.LOG', 'data.sqlite', 'data.db', 'RESULTS/evidence.json', 'NODE_MODULES/package.json', '.env.production']) {
+    assert.equal(blockedPath(`examples/${name}`), true, name);
+  }
+  for (const name of ['.env.example', 'migrations/initial.sql', 'package-lock.json']) assert.equal(blockedPath(name), false, name);
+});
 test('preview serves docs but blocks environment files, dependencies and backup artifacts', async () => {
   const server = createPreviewServer();
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
