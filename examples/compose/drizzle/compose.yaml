@@ -1,5 +1,12 @@
+x-logging: &bounded-logs
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   db:
+    logging: *bounded-logs
     image: postgres:18-bookworm
     environment:
       POSTGRES_USER: tracker
@@ -13,6 +20,7 @@ services:
       timeout: 3s
       retries: 20
   app:
+    logging: *bounded-logs
     build:
       context: .
       target: runner
@@ -32,6 +40,7 @@ services:
       retries: 12
       start_period: 15s
   tools:
+    logging: *bounded-logs
     profiles: ["tools"]
     build:
       context: .

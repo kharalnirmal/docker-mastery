@@ -92,6 +92,9 @@ test('both tracks retain equivalent UI/API and safe container boundaries', () =>
     assert.match(read(base + 'Dockerfile'), /USER node/);
     assert.doesNotMatch(pkg.scripts['db:migrate'], /push|reset|dev/);
     assert.match(read(base + 'compose.yaml'), /pgdata:\/var\/lib\/postgresql/);
+    assert.match(read(base + 'compose.yaml'), /driver: local/);
+    assert.match(read(base + 'compose.yaml'), /max-size: "10m"/);
+    assert.equal((read(base + 'compose.yaml').match(/logging: \*bounded-logs/g) || []).length, 3);
     assert.match(read(base + '.dockerignore'), /\.env\*/);
   }
 });
