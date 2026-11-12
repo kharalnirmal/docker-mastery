@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const { randomUUID } = require('node:crypto');
+const { assertOwnership } = require('./lab-report.cjs');
 const root = path.resolve(__dirname, '..');
 const prefix = `fieldguide-${randomUUID().slice(0, 8)}`;
 const containers = [], volumes = [], networks = [];
@@ -45,7 +46,7 @@ async function until(action) {
   container('hello', ['hello-world']);
   assert.equal(inspect(`${prefix}-hello`).State.ExitCode, 0);
   report.checks.push('hello-world: greeting container exits zero');
-  docker('build', '-t', `${prefix}:checkpoint-01`, path.join(root, 'examples/docker/01-static-page'));
+  docker('build', '--label', `fieldguide.check=${prefix}`, '-t', `${prefix}:checkpoint-01`, path.join(root, 'examples/docker/01-static-page'));
   container('page', ['-d', '-p', '127.0.0.1::80', `${prefix}:checkpoint-01`]);
   let port = docker('port', `${prefix}-page`, '80/tcp').split(':').at(-1);
   await until(async () => {
@@ -96,16 +97,22 @@ async function until(action) {
   report.cleanup = [];
   for (const name of containers.reverse()) {
     try {
-      assert.equal(inspect(name).Config.Labels['fieldguide.check'], prefix, 'Refusing to remove an unowned container');
+      assertOwnership(inspect(name).Config.Labels, 'fieldguide.check', prefix);
       docker('rm', '-f', name);
     } catch (error) { report.cleanup.push(`${name}: ${error.message}`); }
   }
-  for (const name of networks) try { docker('network', 'rm', name); } catch (error) { report.cleanup.push(`${name}: ${error.message}`); }
+  for (const name of networks) try {
+    assertOwnership(JSON.parse(docker('network', 'inspect', name))[0].Labels, 'fieldguide.check', prefix);
+    docker('network', 'rm', name);
+  } catch (error) { report.cleanup.push(`${name}: ${error.message}`); }
   for (const name of volumes) try {
-    assert.equal(JSON.parse(docker('volume', 'inspect', name))[0].Labels['fieldguide.check'], prefix, 'Refusing to remove an unowned volume');
+    assertOwnership(JSON.parse(docker('volume', 'inspect', name))[0].Labels, 'fieldguide.check', prefix);
     docker('volume', 'rm', name);
   } catch (error) { report.cleanup.push(`${name}: ${error.message}`); }
-  try { docker('image', 'rm', `${prefix}:checkpoint-01`); } catch (error) { report.cleanup.push(error.message); }
+  try {
+    assertOwnership(JSON.parse(docker('image', 'inspect', `${prefix}:checkpoint-01`))[0].Config.Labels, 'fieldguide.check', prefix);
+    docker('image', 'rm', `${prefix}:checkpoint-01`);
+  } catch (error) { report.cleanup.push(error.message); }
   fs.mkdirSync(path.join(root, 'tests/results'), { recursive: true });
   fs.writeFileSync(path.join(root, 'tests/results/docker-labs.json'), JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(report, null, 2));
