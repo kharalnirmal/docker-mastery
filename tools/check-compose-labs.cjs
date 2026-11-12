@@ -48,6 +48,7 @@ async function waitFor(url, status) {
     assert.equal((await send('/api/tasks', 'POST', { title: ' ' })).status, 400);
     assert.equal((await send('/api/tasks', 'POST', { title: 'Invalid', assigneeId: 'unknown' })).status, 400);
     assert.equal((await fetch(`${base}/api/tasks?offset=-1`)).status, 400);
+    for (const query of ['offset=', 'offset=0&offset=20', 'offset=10001', 'offset=1e2']) assert.equal((await fetch(`${base}/api/tasks?${query}`)).status, 400, query);
     assert.equal((await send('/api/tasks/absent', 'PATCH', { done: true })).status, 404);
     const response = await send('/api/tasks', 'POST', { title: 'Compose persistence proof' });
     assert.equal(response.status, 201);

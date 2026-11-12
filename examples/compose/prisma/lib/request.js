@@ -1,4 +1,11 @@
 // Bound bytes before parsing; Content-Length alone is not trustworthy.
+export function parseOffset(params) {
+  const values = params.getAll('offset');
+  if (!values.length) return 0;
+  if (values.length !== 1 || !/^\d+$/.test(values[0])) return null;
+  const value = Number(values[0]);
+  return Number.isSafeInteger(value) && value <= 10000 ? value : null;
+}
 export async function readJson(request, limit = 16384) {
   const fail = (status, message) => Object.assign(new Error(message), { status });
   if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') throw fail(415, 'Use application/json');

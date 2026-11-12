@@ -1,6 +1,10 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 for (const track of ['prisma', 'drizzle']) {
+  test(`${track}: pagination rejects empty, duplicate and out-of-range offsets`, async () => {
+    const { parseOffset } = await import(`../examples/compose/${track}/lib/request.js`);
+    for (const [query, expected] of [['', 0], ['offset=0', 0], ['offset=20', 20], ['offset=10000', 10000], ['offset=', null], ['offset=1&offset=2', null], ['offset=-1', null], ['offset=1.5', null], ['offset=1e2', null], ['offset=10001', null], ['offset=999999999999999999999', null]]) assert.equal(parseOffset(new URLSearchParams(query)), expected, query);
+  });
   test(`${track}: bounded JSON parsing rejects unsupported, oversized and malformed bodies`, async () => {
     const { readJson } = await import(`../examples/compose/${track}/lib/request.js`);
     const request = (body, headers = { 'Content-Type': 'application/json' }) => new Request('http://localhost/api/tasks', { method: 'POST', body, headers });

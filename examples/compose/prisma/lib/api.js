@@ -1,6 +1,6 @@
 import 'server-only';
 import * as store from './store.js';
-import { readJson } from './request.js';
+import { readJson, parseOffset } from './request.js';
 
 const json = (data, status = 200) => Response.json(data, { status, headers: { 'Cache-Control': 'no-store' } });
 function validate(data, partial = false) {
@@ -13,9 +13,9 @@ function validate(data, partial = false) {
   return Object.keys(data).length > 0;
 }
 export async function GET(request) {
-  const raw = new URL(request.url).searchParams.get('offset') || '0';
-  if (!/^\d+$/.test(raw) || Number(raw) > 10000) return json({ error: 'Invalid offset' }, 400);
-  try { return json({ tasks: await store.list(Number(raw)), members: await store.members() }); }
+  const offset = parseOffset(new URL(request.url).searchParams);
+  if (offset === null) return json({ error: 'Invalid offset' }, 400);
+  try { return json({ tasks: await store.list(offset), members: await store.members() }); }
   catch { return json({ error: 'Database unavailable' }, 503); }
 }
 async function write(request, context, partial) {
