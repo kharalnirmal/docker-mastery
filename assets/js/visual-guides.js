@@ -79,5 +79,13 @@
     exercise: 'Predict health, readiness and container status during the controlled database-stop lab. Why is a successful health response insufficient proof that creating a task works?',
     reference: 'https://docs.docker.com/compose/how-tos/startup-order/'
   });
+  guide({
+    lesson: 'nextjs-postgres', id: 'public-build-values', title: 'Browser configuration can be frozen at build time',
+    analogy: 'A printed brochure keeps the phone number from printing day. Changing the office contact sheet later does not rewrite brochures already handed to customers.',
+    technical: 'Next.js can inline direct NEXT_PUBLIC_* references into browser JavaScript during the production build. Changing a container environment variable later does not rewrite those emitted bundles. Server-only runtime configuration is different, but code executed during static generation may still capture build-time values. Keep DATABASE_URL in server code, never under a public prefix. To promote one image across environments, deliberately choose runtime configuration that does not depend on rebuilding public values, or clearly label environment-specific builds. A production image runs built output, not next dev.',
+    steps: ['Classify each value as public browser data or private server configuration.', 'Identify whether the code reads it during build, static generation, or a runtime request.', 'Build and inspect the actual browser/server behavior with harmless sample values.', 'Promote the same artifact only when its configuration model supports that promise.'],
+    exercise: 'Explain why setting a new NEXT_PUBLIC_API_URL at docker run may leave the old address visible in the browser. Which variable must never appear in a client bundle?',
+    reference: 'https://nextjs.org/docs/app/guides/environment-variables'
+  });
   // More guides can be added here.
 })();
