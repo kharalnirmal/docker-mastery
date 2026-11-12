@@ -127,5 +127,13 @@
     exercise: 'An app is slow but alive; another exits with code 137. What evidence distinguishes CPU throttling from OOM or a manual kill? Why can a single stats snapshot miss a short peak?',
     reference: 'https://docs.docker.com/engine/containers/resource_constraints/'
   });
+  guide({
+    lesson: 'registry-artifacts', id: 'artifact-identity', title: 'Tags name releases; digests identify content',
+    analogy: 'A shelf label reading today\'s edition can move to another book. A fingerprint of the exact edition lets reviewers agree which book they inspected, but does not prove its author is trustworthy.',
+    technical: 'A registry tag is a mutable name unless repository policy enforces otherwise. A digest identifies particular manifest content. For multi-platform publishing, an index digest identifies the platform mapping while a platform manifest digest identifies one selected image; record which identity type you mean. An image ID from the local engine is not interchangeable with every registry digest. Pinning a digest supports reproducibility, not safety by itself. An SBOM inventories components, provenance describes build origin, and a verified signature binds an identity under a trust policy. Scanning has coverage and timing limits; none of these eliminates review.',
+    steps: ['Build and test a candidate artifact with a recorded source revision.', 'Publish only after approval, then record the registry digest and supported platform.', 'Review inventory, provenance, signature policy and vulnerability findings for that artifact.', 'Deploy the reviewed digest and retain the previous compatible app/tools pair.'],
+    exercise: 'Two hosts pull the same tag on different days. Why might they run different bytes? Does knowing an exact digest prove that the image is nonmalicious?',
+    reference: 'https://docs.docker.com/dhi/core-concepts/digests/'
+  });
   // More guides can be added here.
 })();
