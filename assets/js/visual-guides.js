@@ -55,5 +55,13 @@
     exercise: 'Trace a failed browser request separately from a failed app-to-database connection. Which hostname and port belong to each hop, and which hop never needs a published DB port?',
     reference: 'https://docs.docker.com/compose/how-tos/networking/'
   });
+  guide({
+    lesson: 'persistent-data', id: 'storage-lifetimes', title: 'Choose storage by lifetime and ownership',
+    analogy: 'A hotel room desk is temporary working space, a rented locker keeps belongings between stays, and your own suitcase remains yours. None is a second independent copy of its contents.',
+    technical: 'A container writable layer remains through stop/start but disappears when that container is removed. A named volume has a separate lifecycle; removing a container does not normally remove the named volume. A bind mount points to a particular host path and carries host ownership and sharing constraints. A tmpfs mount is temporary and loses its contents when the container stops. Mounting over a populated image path hides the image contents while mounted; it does not merge every file automatically. Never use a volume deletion to fix an unexplained database startup error.',
+    steps: ['Classify the data as reproducible scratch, editable source, or durable business state.', 'Select tmpfs, a bind mount, or an explicitly owned named volume accordingly.', 'Record the actual mount source before recreating containers.', 'Back up durable data independently and test a separate restoration.'],
+    exercise: 'Predict which task data survives stop/start, container replacement, and explicit volume deletion. Why does a surviving volume still fail as a backup after host disk loss?',
+    reference: 'https://docs.docker.com/engine/storage/'
+  });
   // More guides can be added here.
 })();
