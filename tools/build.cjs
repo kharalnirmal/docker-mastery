@@ -7,11 +7,12 @@ const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'dist');
 const marker = '.docker-mastery-build';
 function publicFile(file) {
-  if (!/^(?:index\.html|README\.md|NOTICE\.md|CONTENT-REVIEW\.md|LAB-VALIDATION\.md|assets\/|examples\/|docs\/)/.test(file)) return false;
+  if (typeof file !== 'string' || /[\\:\x00-\x1f\x7f]/.test(file) || file.split('/').some(part => !part || part === '.' || part === '..')) return false;
+  if (!/^(?:(?:index\.html|README\.md|NOTICE\.md|CONTENT-REVIEW\.md|LAB-VALIDATION\.md)$|assets\/|examples\/|docs\/)/.test(file)) return false;
   return !file.split('/').some(part =>
-    ['node_modules', '.next', 'generated', 'results', '.git'].includes(part) ||
+    ['node_modules', '.next', 'generated', 'results', '.git'].includes(part.toLowerCase()) ||
     (part.startsWith('.') && !['.env.example', '.dockerignore'].includes(part)) ||
-    /\.(?:dump|gz|pem|key|p12|pfx|log|jpg|bak)$/i.test(part));
+    /\.(?:dump|gz|tgz|zip|tar|pem|key|p12|pfx|log|jpg|bak|sqlite|db)$/i.test(part));
 }
 function build() {
   const files = execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
