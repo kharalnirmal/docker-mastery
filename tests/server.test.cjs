@@ -13,6 +13,15 @@ test('preview serves docs but blocks environment files, dependencies and backup 
       assert.equal((await fetch(base + url)).status, 403, url);
     }
     assert.equal((await fetch(base + '/missing')).status, 404);
+    for (const method of ['POST', 'PUT', 'DELETE', 'OPTIONS']) {
+      const response = await fetch(base + '/', { method });
+      assert.equal(response.status, 405);
+      assert.equal(response.headers.get('allow'), 'GET, HEAD');
+    }
+    const head = await fetch(base + '/', { method: 'HEAD' });
+    assert.equal(head.status, 200);
+    assert.equal(await head.text(), '');
+    assert.equal(Number(head.headers.get('content-length')), Buffer.byteLength(await (await fetch(base + '/')).text()));
     const portrait = await fetch(base + '/assets/images/naruto.webp');
     assert.equal(portrait.status, 200);
     assert.equal(portrait.headers.get('content-type'), 'image/webp');

@@ -5,6 +5,9 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.md': 'text/plain; charset=utf-8', '.ttf': 'font/ttf', '.woff2': 'font/woff2' };
 function createPreviewServer() { return http.createServer(async (req, res) => {
+  if (!['GET', 'HEAD'].includes(req.method)) {
+    res.writeHead(405, { Allow: 'GET, HEAD' }); return res.end('Method not allowed');
+  }
   try {
     const pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
     const blocked = pathname.split(/[\\/]/).some(part =>
@@ -17,8 +20,8 @@ function createPreviewServer() { return http.createServer(async (req, res) => {
     const real = await fs.realpath(file);
     if (!real.startsWith(root + path.sep)) { res.writeHead(403); return res.end('Forbidden'); }
     const data = await fs.readFile(file);
-    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'X-Content-Type-Options': 'nosniff' });
-    res.end(data);
+    res.writeHead(200, { 'Content-Type': types[path.extname(file)] || 'application/octet-stream', 'Content-Length': data.length, 'X-Content-Type-Options': 'nosniff' });
+    res.end(req.method === 'HEAD' ? undefined : data);
   } catch { res.writeHead(404); res.end('Not found'); }
 }); }
 module.exports = { createPreviewServer };
