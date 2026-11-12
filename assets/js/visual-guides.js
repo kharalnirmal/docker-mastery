@@ -95,5 +95,13 @@
     exercise: 'Would an hourly verified backup meet a five-minute RPO? What extra evidence would you need to claim host-loss recovery rather than a same-host restore?',
     reference: 'https://www.postgresql.org/docs/18/backup-dump.html'
   });
+  guide({
+    lesson: 'schema-upgrades', id: 'expand-contract', title: 'Expand and contract preserves release compatibility',
+    analogy: 'A city opens a replacement bridge before closing the old one. Removing the old crossing first strands travelers still following yesterday\'s route.',
+    technical: 'Schema and application versions can overlap during a release. First add a backward-compatible shape, such as the nullable description column in this lab. Apply the reviewed migration once through the selected tools artifact, then verify both retained rows and old application behavior. A later application can adopt the field. Backfills and constraints need their own bounded, tested plan. Remove an old field only after old readers and writers are gone and the rollback window has closed. Rolling back an application image does not undo SQL or erase new writes safely.',
+    steps: ['Back up and expand the schema without breaking the current app.', 'Verify old code and existing rows against the expanded schema.', 'Deploy compatible new code and perform reviewed, resumable backfills if needed.', 'Contract only in a later reviewed change after old dependencies are retired.'],
+    exercise: 'Why is adding a nullable field safer than renaming a required field in one release? Name the compatibility proof needed before returning to an old image.',
+    reference: 'https://www.prisma.io/docs/guides/data-migration'
+  });
   // More guides can be added here.
 })();
