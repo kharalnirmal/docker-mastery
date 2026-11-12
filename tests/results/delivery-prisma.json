@@ -1,8 +1,8 @@
 {
   "track": "prisma",
-  "project": "guide-delivery-prisma-1793689372063",
+  "project": "guide-delivery-prisma-1794453850063",
   "context": "desktop-linux",
-  "checkedAt": "2026-11-03T07:02:52.121Z",
+  "checkedAt": "2026-11-12T03:24:10.113Z",
   "checks": [
     "schema/client generation with remediated tooling",
     "controlled migration failure preserves business rows and verified ORM history",
@@ -11,8 +11,8 @@
     "SIGTERM stop without forced kill or OOM; process restarts healthy",
     "pull-only release overlay recreates same artifact and retains database writes"
   ],
-  "appImage": "sha256:00d89fb8dcc7dc237572965a4ae40a40c09e7d4626f68332b9e16063916abbee",
-  "toolsImage": "sha256:2a9220afa0f0df1e6c1096d596486c388b99b359ae20c920b766f3450f3b6510",
+  "appImage": "sha256:a875ac7220a70563ee75e64f76f2e7a4d3b873d71f8a9d9ae486c51bf0fd6124",
+  "toolsImage": "sha256:5feaf5f56264e69252c3997f34f8d35eb13cffbb0c3f0925d598aef8e1c07f86",
   "passed": true,
   "cleaned": true
 }

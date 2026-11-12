@@ -14,6 +14,17 @@ through Compose, database recovery, secure builds, and controlled delivery.
 
 [Operations runbook](docs/OPERATIONS-RUNBOOK.md) · [Completion checklist](docs/COMPLETION-CHECKLIST.md)
 
+### Hard topics, explained visually
+
+The lessons now include **16 original diagrams** with real-life analogies,
+step-by-step text workflows, full-size links and reasoning exercises. Start with
+[shared kernels](index.html#first-container/shared-kernel),
+[build caching](index.html#first-dockerfile/cache-invalidation),
+[two network address books](index.html#container-networks/two-address-books),
+[storage lifetimes](index.html#persistent-data/storage-lifetimes), or
+[the release decision](index.html#single-host-release/promotion-decision).
+See the [verified improvement record](docs/VERIFIED-IMPROVEMENTS.md) for scope and evidence.
+
 ## Why this guide?
 
 - **Learn by doing:** run containers, build images, trace requests, and diagnose failures.
@@ -141,7 +152,7 @@ workflow runs the Node tests and static build on pushes and pull requests.
 
 Recorded local verification includes:
 
-- **16 passing Node tests** covering content, links, file parity, documentation handoffs, artwork budgets, safe exports, and preview restrictions.
+- **26 passing Node tests** covering content, diagrams, links, track parity, bounded API requests, cleanup reporting, safe exports, and preview restrictions.
 - Browser checks across **seven viewport sizes**, all 20 lessons at mobile width,
   keyboard navigation, search, themes, and trusted emulated touch.
 - Container/image/network/volume checks and BuildKit secret/cache boundaries.
@@ -151,6 +162,8 @@ Recorded local verification includes:
 Read [CONTENT-REVIEW.md](CONTENT-REVIEW.md) for dated results and limitations, and
 [LAB-VALIDATION.md](LAB-VALIDATION.md) for reproduction commands. Browser checks
 require a separately installed `agent-browser` and a running preview.
+Run `node tests/browser-diagrams.cjs` to check that all 16 SVG diagrams keep
+their text inside the viewBox in a real browser.
 Run `node tests/browser-accessibility.cjs` for light/dark axe scans, reduced-motion
 checks, and a 200% CSS-zoom reachability stress test. These automated checks do not
 replace screen-reader, physical-device, or manual browser/text-zoom review.

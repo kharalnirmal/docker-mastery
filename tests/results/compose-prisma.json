@@ -1,6 +1,6 @@
 {
   "track": "prisma",
-  "project": "guide-prisma-check-1793689251859",
+  "project": "guide-prisma-check-1794453310515",
   "platform": "win32",
   "checks": [
     "Compose configuration",
@@ -8,13 +8,14 @@
     "fresh migration and repeat migration/seed",
     "equivalent seeds and health endpoints",
     "create, list, assignment, completion and invalid requests",
+    "bounded local log rotation",
     "non-root runner and unpublished database",
     "data survives full container replacement",
     "database outage: health 200, readiness 503, then recovery"
   ],
-  "base": "http://127.0.0.1:32815",
+  "base": "http://127.0.0.1:32772",
   "images": {
-    "app": "sha256:96c8d0bf7ae3d440fb21edc5571125fcec977c8ab6860ec75725169de0acbddb",
+    "app": "sha256:c5a9fef286ac6c969d93b779b5155b86d2c42ecd46aa48a02cc3512451f6ee3c",
     "nodeTag": "node:24-bookworm-slim",
     "postgresTag": "postgres:18-bookworm"
   },

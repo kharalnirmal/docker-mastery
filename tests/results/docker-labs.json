@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-11-03T07:00:11.129Z",
-  "prefix": "fieldguide-61f78011",
+  "checkedAt": "2026-11-12T03:15:10.516Z",
+  "prefix": "fieldguide-f7e18daf",
   "checks": [
     "hello-world: greeting container exits zero",
     "Dockerfile builds; loopback HTTP returns 200 and checkpoint heading",
@@ -12,13 +12,13 @@
   ],
   "images": {
     "nginx:stable-alpine": [
-      "nginx@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d6094767ac30e97949"
+      "nginx@sha256:583b7f2fce1cdb8da5ad5c39ebd3c33b98b87d493190e548bdee1fa8c619c311"
     ],
     "alpine:3": [
-      "alpine@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a"
+      "alpine@sha256:f59abe656b692d901e184be3445e084786602108599d2a51d229c0f5a48c71bf"
     ],
     "hello-world": [
-      "hello-world@sha256:c567b231f65614688711a75f31518a064258a51d442117a3e771a3a8fdba78ef"
+      "hello-world@sha256:cf1b20a0c89a666b6950fecda7ccbc1b1a86520e7c53f908f3a21e79d0d60458"
     ]
   },
   "context": "desktop-linux",

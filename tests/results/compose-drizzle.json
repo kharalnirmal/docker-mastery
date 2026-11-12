@@ -1,6 +1,6 @@
 {
   "track": "drizzle",
-  "project": "guide-drizzle-check-1793689285810",
+  "project": "guide-drizzle-check-1794453454643",
   "platform": "win32",
   "checks": [
     "Compose configuration",
@@ -8,13 +8,14 @@
     "fresh migration and repeat migration/seed",
     "equivalent seeds and health endpoints",
     "create, list, assignment, completion and invalid requests",
+    "bounded local log rotation",
     "non-root runner and unpublished database",
     "data survives full container replacement",
     "database outage: health 200, readiness 503, then recovery"
   ],
-  "base": "http://127.0.0.1:32817",
+  "base": "http://127.0.0.1:32774",
   "images": {
-    "app": "sha256:7973d4d916e20ea0685d708667a2253ec19bc83fc626d34d3b080bb3a99b2e35",
+    "app": "sha256:7a9dd29f105f779248bd1ccb6ba3f1cdbc93e72c981a9f5aa9952534447cfe4a",
     "nodeTag": "node:24-bookworm-slim",
     "postgresTag": "postgres:18-bookworm"
   },

@@ -1,8 +1,8 @@
 {
   "track": "prisma",
-  "project": "guide-recovery-prisma-1793689318863",
+  "project": "guide-recovery-prisma-1794453799015",
   "context": "desktop-linux",
-  "checkedAt": "2026-11-03T07:01:58.941Z",
+  "checkedAt": "2026-11-12T03:23:19.081Z",
   "checks": [
     "fresh history plus existing completed/assigned task",
     "custom archive copied to host; separate empty-database restore matches all business rows",
@@ -10,9 +10,9 @@
     "nullable-description migration and repeat deploy preserve existing rows",
     "unchanged standalone app reads existing data and creates rows after expansion"
   ],
-  "archive": "guide-recovery-prisma-1793689318863.dump",
-  "archiveBytes": 5958,
-  "archiveSha256": "9d79422f92611c97111516303fbbaacf96a9ab88be409de177db248d967cf0f6",
+  "archive": "guide-recovery-prisma-1794453799015.dump",
+  "archiveBytes": 5957,
+  "archiveSha256": "771de077140e75cf26b1c30f03cf5ed8e729bc37f1a04ae6ce3a8478af4c889b",
   "passed": true,
   "cleaned": true
 }

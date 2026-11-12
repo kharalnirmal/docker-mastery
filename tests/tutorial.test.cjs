@@ -16,7 +16,7 @@ const lessons = context.window.LESSONS;
 test('visual guides have accessible original diagrams and text workflows', () => {
   const source = read('assets/js/visual-guides.js');
   const guides = [...source.matchAll(/lesson: '([^']+)', id: '([^']+)'/g)];
-  assert.ok(guides.length > 0);
+  assert.equal(guides.length, 16);
   for (const [, lesson, id] of guides) {
     const html = lessons.find(entry => entry.id === lesson).html;
     assert.ok(html.includes(`id="${id}"`));

@@ -71,7 +71,7 @@ check(`location.hash === '#first-dockerfile'`);
 check(`document.querySelectorAll('.code-frame').length > 0 && getComputedStyle(document.querySelector('pre')).fontFamily.includes('JetBrains Mono') && document.querySelectorAll('.lesson-link').length === 20`);
 run('open', 'http://127.0.0.1:4173/#first-container/run');
 check(`document.getElementById('run').getBoundingClientRect().top > 50`);
-check(`[...document.images].every(img => img.complete && img.naturalWidth > 0)`);
+check(`(await Promise.all([...document.images].map(img => { img.loading = 'eager'; return img.decode(); })), [...document.images].every(img => img.complete && img.naturalWidth > 0))`);
 run('click', '.code-copy');
 check(`document.querySelector('.code-copy').textContent === 'Copied'`);
 run('set', 'viewport', '320', '568');
@@ -79,6 +79,13 @@ for (const id of ['first-container','container-lifecycle','first-dockerfile','co
   run('open', `http://127.0.0.1:4173/#${id}`);
   check(`document.querySelectorAll('article h2').length >= 8 && document.documentElement.scrollWidth <= innerWidth && document.querySelector('.lesson-link[aria-current="page"]').hash === location.hash`);
 }
+const visualGuides = JSON.parse(run('--json', 'eval', `window.LESSONS.flatMap(lesson => [...lesson.html.matchAll(/assets\\/images\\/guides\\/([^"/]+)\\.svg/g)].filter((match, index) => index % 2 === 0).map(match => ({ lesson: lesson.id, id: match[1] })))`)).data.result;
+assert.equal(visualGuides.length, 16);
+for (const { lesson, id } of visualGuides) {
+  run('open', `http://127.0.0.1:4173/#${lesson}/${id}`);
+  check(`(await Promise.all([...document.querySelectorAll('article img')].map(img => { img.loading = 'eager'; return img.decode(); })), !!document.getElementById('${id}') && document.querySelector('img[src="assets/images/guides/${id}.svg"]').naturalWidth > 0 && document.documentElement.scrollWidth <= innerWidth && document.querySelector('#toc a[href="#${lesson}/${id}"]') !== null)`);
+}
+console.log('PASS all 16 visual-guide deep links, diagrams, contents links and mobile width');
 for (const width of [320, 768, 1440]) {
   run('set', 'viewport', String(width), '900');
   run('open', 'http://127.0.0.1:4173/#first-dockerfile/files');
