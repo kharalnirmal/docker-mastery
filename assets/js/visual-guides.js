@@ -111,5 +111,13 @@
     exercise: 'A history table says failed, but some new rows exist. Why is blindly marking rolled back unsafe? What must you establish before replaying the migration?',
     reference: 'https://www.prisma.io/docs/orm/prisma-migrate/workflows/troubleshooting'
   });
+  guide({
+    lesson: 'buildkit-workflows', id: 'secret-mount-boundary', title: 'Secret mounts limit exposure, not malicious behavior',
+    analogy: 'A visitor temporarily borrows a key at reception. Taking the key back prevents keeping that key, but cannot prevent the visitor from photographing it while trusted with access.',
+    technical: 'BuildKit can mount a secret for one RUN without adding the secret mount itself to the resulting image layer. The instruction still has access and could copy or print its contents, so reviewed build code matters. Never use real credentials in the demonstration. A cache mount is also separate from the final image by default, but is disposable performance state rather than a credential vault. Secret contents are not themselves a normal cache-invalidation input: changing a secret does not guarantee a cached instruction reruns. Test the uncached missing-secret path separately from a cached rebuild.',
+    steps: ['Provide a fake secret through the build secret interface, not COPY, ARG or ENV.', 'Allow only the reviewed RUN instruction to read the temporary mount.', 'Copy only the intended nonsecret result into the runtime stage.', 'Verify mount absence and intended behavior, while recognizing history inspection is not a complete secret scan.'],
+    exercise: 'How could a malicious RUN leak a correctly mounted secret? Why must the missing-secret check use a cache miss to prove required=true is enforced?',
+    reference: 'https://docs.docker.com/build/building/secrets/'
+  });
   // More guides can be added here.
 })();
